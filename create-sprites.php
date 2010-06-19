@@ -21,11 +21,13 @@ while ( false !== ( $file = readdir( $handle ) ) ) {
 	// Don't want to include this:
 	if ( $file == 'nav-icons1.png' ) continue;
 	$icon_files[] = "$dirpath/$file";
-	preg_match( "#nav-(.+)\.png$#i", $file, $match);
-	echo "\t\t'{$match[1]}',\n";
 }
 closedir($handle);
 sort( $icon_files );
+foreach ( $icon_files as $file ) {
+	preg_match( "#/nav-(.+)\.png$#i", $file, $match);
+	echo "\t\t'{$match[1]}',\n";
+}
 
 $num_icons = sizeof( $icon_files );
 $row_size = 6;
