@@ -144,7 +144,7 @@ class Mystique_Extra_Nav_Icons {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
 
 
-		echo "<ul id='stt_enabled_smilies' class='sttSortable'>\n";
+		echo "<ul id='meni_enabled_icons' class='iconSortable'>\n";
 		// Get the visible smilies in the (eventually) custom order
 		foreach ( $this->default_icons as $icon ) {
 			echo "<li id='sttelement|$image'><img src='{$this->plugin_url}/icons/nav-$icon.png'";
@@ -153,34 +153,33 @@ class Mystique_Extra_Nav_Icons {
 			echo " title='" . str_replace( "'", '&#039;', $text ) . "'";
 			echo " /></li>\n";
 		}
-		#$this->__print_ordered_smilies( $sm[0] );
 		echo "</ul>\n";
 
 		echo "<br style='clear:both'/>\n";
 
-		echo '<h3>' . __( "Hidden smilies:", $this->plugin_slug ) . '</h3>';
-		echo "<ul id='stt_disabled_smilies' class='sttSortable'>\n";
-		// Get the hidden smilies in the (eventually) custom order
+		echo '<h3>' . __( "Disabled icons:", $this->plugin_slug ) . '</h3>';
+		echo "<ul id='meni_disabled_icons' class='iconSortable'>\n";
 		#$this->__print_ordered_smilies( $sm[1] );
 		echo "</ul>";
 
 
 		?>
 <style type="text/css">
-	.sttSortable { list-style-type: none; margin: 10px 10px 20px; padding: 5px; width: 50%;min-height: 20px;}
-	.sttSortable .wp-smiley {cursor: move;}
-	#stt_enabled_smilies {background-color: #cfc;border: 1px solid #8a8;float: left;}
-	#stt_disabled_smilies {background-color: #aaa;border: 1px solid #666;float: left;}
-	#stt_enabled_smilies li, #stt_disabled_smilies li { margin: 3px 3px 3px 0; padding: 1px; display: block; float: left; border: 1px solid #ddd}
+	.iconSortable { list-style-type: none; margin: 10px 10px 20px; padding: 5px; width: 50%;min-height: 20px;}
+	.iconSortable img {cursor: move;}
+	.iconSortableSelected {background-color: #F2F4FF;border-color: #8d9dff !important;}
+	#meni_enabled_icons {background-color: #cfc;border: 1px solid #8a8;float: left;}
+	#meni_disabled_icons {background-color: #aaa;border: 1px solid #666;float: left;}
+	#meni_enabled_icons li, #meni_disabled_icons li { margin: 3px 3px 3px 0; padding: 1px; display: block; float: left; border: 1px solid #ddd}
 </style>
 <script type="text/javascript">
 /* <![CDATA[ */
 (function($) {
-	$("#stt_enabled_smilies, #stt_disabled_smilies").sortable({
-		connectWith: '.sttSortable',
+	$("#meni_enabled_icons, #meni_disabled_icons").sortable({
+		connectWith: '.iconSortable',
 		stop: function (event, ui) {
-			enabled_order = $("#stt_enabled_smilies").sortable('toArray');
-			disabled_order = $("#stt_disabled_smilies").sortable('toArray');
+			enabled_order = $("#meni_enabled_icons").sortable('toArray');
+			disabled_order = $("#meni_disabled_icons").sortable('toArray');
 			for (i = 0;i < enabled_order.length;i++) {
 				enabled_order[i] = enabled_order[i].split('|')[1]
 			}
@@ -204,6 +203,11 @@ class Mystique_Extra_Nav_Icons {
 			});
 		}
 	}).disableSelection();
+
+	$("#meni_enabled_icons img, #meni_disabled_icons img").click(function() {
+		$("#meni_enabled_icons li, #meni_disabled_icons li").removeClass('iconSortableSelected');
+		$(this).parent().addClass('iconSortableSelected');
+	});
 })(jQuery);
 /* ]]> */
 </script>
