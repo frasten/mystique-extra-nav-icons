@@ -18,52 +18,55 @@ class Mystique_Extra_Nav_Icons {
 		'android' => '',
 		'apple' => '',
 		'beer' => '',
-		'blogger' => '',
+		'blogger' => 'http://YOUR_USERNAME.blogspot.com/',
 		'coffee' => '',
 		'contact' => '',
-		'dailymotion' => '',
-		'delicious' => '',
-		'digg' => '',
-		'discogs' => '',
-		'email' => '',
+		'dailymotion' => 'http://dailymotion.com/YOUR_USERNAME',
+		'delicious' => 'http://delicious.com/YOUR_USERNAME',
+		'digg' => 'http://digg.com/users/YOUR_USERNAME',
+		'discogs' => 'http://www.discogs.com/artist/YOUR_USERNAME',
+		'email' => 'mailto:YOUR_EM@IL.COM',
 		'email_subscription' => '',
-		'facebook' => '',
-		'flickr' => '',
-		'formspring' => '',
-		'friendfeed' => '',
-		'github' => '',
-		'gmail' => '',
-		'goodreads' => '',
-		'googlebuzz' => '',
+		'facebook' => 'http://www.facebook.com/YOUR_USERNAME',
+		'flickr' => 'http://www.flickr.com/photos/YOUR_USERNAME',
+		'formspring' => 'http://www.formspring.me/YOUR_USERNAME',
+		'friendfeed' => 'http://friendfeed.com/YOUR_USERNAME',
+		'github' => 'http://github.com/YOUR_USERNAME',
+		'gmail' => 'mailto:YOUR_USERNAME@gmail.com',
+		'goodreads' => 'http://www.goodreads.com/user/show/YOUR_USERID',
+		'googlebuzz' => 'http://www.google.com/profiles/YOUR_USERNAME',
 		'googlewave' => '',
-		'hyves' => '',
-		'identica' => '',
-		'lastfm' => '',
-		'linkedin' => '',
+		'hyves' => 'http://YOUR_USERNAME.hyves.nl/',
+		'identica' => 'http://identi.ca/YOUR_USERNAME',
+		'lastfm' => 'http://www.lastfm.it/user/YOUR_USERNAME',
+		'linkedin' => 'http://linkedin.com/in/YOUR_PUBLIC_PROFILE',
 		'mirc' => '',
-		'myspace' => '',
+		'myspace' => 'http://www.myspace.com/YOUR_USERNAME',
 		'paypal' => '',
-		'picasa' => '',
+		'picasa' => 'http://picasaweb.google.it/YOUR_USERNAME',
 		'rss' => '',
-		'skype' => '',
-		'slideshare' => '',
-		'soundcloud' => '',
-		'sourceforge' => '',
-		'spotify' => '',
+		'skype' => 'skype:YOUR_USERNAME',
+		'slideshare' => 'http://www.slideshare.net/YOUR_USERNAME',
+		'soundcloud' => 'http://soundcloud.com/YOUR_USERNAME',
+		'sourceforge' => 'http://YOUR_PROJECT.sourceforge.net/',
+		'spotify' => 'spotify:artist:YOUR_ID',
 		'steam' => '',
-		'twitter' => '',
-		'ubuntu' => '',
-		'vimeo' => '',
-		'wiki' => '',
-		'windows_live' => '',
-		'xing' => '',
-		'yahoo' => '',
-		'youtube' => '',
+		'twitter' => 'http://twitter.com/YOUR_USERNAME',
+		'ubuntu' => 'http://ubuntuforums.org/member.php?u=YOUR_USERID',
+		'vimeo' => 'http://vimeo.com/YOUR_USERNAME',
+		'wiki' => 'http://en.wikipedia.org/wiki/CHANGE_ME',
+		'windows_live' => 'http://YOUR_USERNAME.profile.live.com/',
+		'xing' => 'http://www.xing.com/profile/YOUR_USERNAME',
+		'yahoo' => 'http://pulse.yahoo.com/YOUR_USERID',
+		'youtube' => 'http://www.youtube.com/user/YOUR_USERNAME',
 	);
 
 	function init() {
 		$dir = basename(dirname(__FILE__));
 		$this->plugin_url = WP_PLUGIN_URL . "/$dir";
+		$this->default_icons['rss'] = get_bloginfo( 'rss2_url' );
+		// FOR DEBUG PURPOSES:
+		//delete_option($this->plugin_slug);
 	}
 
 
@@ -201,6 +204,7 @@ class Mystique_Extra_Nav_Icons {
 	#meni_url_form {padding: 5px;border: 1px solid #666;background-color: #ddd;}
 	#meni_saving {display: none;margin-top: 4px;}
 	.meni_icon_settings {float: left; margin-top: 10px;margin-left: 20px;width: 40%;}
+	#meni_url_textbox {width: 100%;}
 </style>
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -209,7 +213,7 @@ var meni_urls = {
 	$temp = array();
 	$urls = $this->merge_urls_from_db();
 	foreach ( $urls as $icon => $url ) {
-		$temp[] = "$icon: '" . urlencode( $url ) . "'";
+		$temp[] = "$icon: '" . esc_attr( $url ) . "'";
 	}
 	echo implode( ",\n", $temp);
 ?>
@@ -256,12 +260,14 @@ var meni_selected_icon;
 	});
 
 	var meni_keypress_timeout;
+	var meni_oldvalue;
 	$("#meni_url_textbox").keyup(function (e) {
 		meni_urls[meni_selected_icon] = $("#meni_url_textbox").val();
 		if (meni_keypress_timeout != undefined) {
 			clearTimeout(meni_keypress_timeout);
 		}
 		meni_keypress_timeout = setTimeout(function() {
+			if (meni_oldvalue == meni_urls[meni_selected_icon]) return;
 			meni_keypress_timeout = undefined;
 			$("#meni_saving").show();
 			meni_urls.action = 'meni_saveurls';
@@ -272,6 +278,7 @@ var meni_selected_icon;
 				data: meni_urls,
 				success: function(data) {
 					$("#meni_saving").hide();
+					meni_oldvalue = meni_urls[meni_selected_icon];
 				}
 			});
 		}, 500);
