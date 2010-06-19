@@ -15,50 +15,50 @@ class Mystique_Extra_Nav_Icons {
 	var $plugin_slug = 'mystique-extra-nav-icons';
 	var $plugin_url;
 	var $default_icons = array(
-		'android',
-		'apple',
-		'beer',
-		'blogger',
-		'coffee',
-		'contact',
-		'dailymotion',
-		'delicious',
-		'digg',
-		'discogs',
-		'email',
-		'email_subscription',
-		'facebook',
-		'flickr',
-		'formspring',
-		'friendfeed',
-		'github',
-		'gmail',
-		'goodreads',
-		'googlebuzz',
-		'googlewave',
-		'hyves',
-		'identica',
-		'lastfm',
-		'linkedin',
-		'mirc',
-		'myspace',
-		'paypal',
-		'picasa',
-		'rss',
-		'skype',
-		'slideshare',
-		'soundcloud',
-		'sourceforge',
-		'spotify',
-		'steam',
-		'twitter',
-		'ubuntu',
-		'vimeo',
-		'wiki',
-		'windows_live',
-		'xing',
-		'yahoo',
-		'youtube',
+		'android' => '',
+		'apple' => '',
+		'beer' => '',
+		'blogger' => '',
+		'coffee' => '',
+		'contact' => '',
+		'dailymotion' => '',
+		'delicious' => '',
+		'digg' => '',
+		'discogs' => '',
+		'email' => '',
+		'email_subscription' => '',
+		'facebook' => '',
+		'flickr' => '',
+		'formspring' => '',
+		'friendfeed' => '',
+		'github' => '',
+		'gmail' => '',
+		'goodreads' => '',
+		'googlebuzz' => '',
+		'googlewave' => '',
+		'hyves' => '',
+		'identica' => '',
+		'lastfm' => '',
+		'linkedin' => '',
+		'mirc' => '',
+		'myspace' => '',
+		'paypal' => '',
+		'picasa' => '',
+		'rss' => '',
+		'skype' => '',
+		'slideshare' => '',
+		'soundcloud' => '',
+		'sourceforge' => '',
+		'spotify' => '',
+		'steam' => '',
+		'twitter' => '',
+		'ubuntu' => '',
+		'vimeo' => '',
+		'wiki' => '',
+		'windows_live' => '',
+		'xing' => '',
+		'yahoo' => '',
+		'youtube' => '',
 	);
 
 	function init() {
@@ -92,6 +92,13 @@ class Mystique_Extra_Nav_Icons {
 			return $settings[$name];
 		else
 			return false;
+	}
+
+
+	function update_option( $key, $value ) {
+		$settings = get_option( $this->plugin_slug );
+		$settings[$key] = $value;
+		update_option( $this->plugin_slug, $settings );
 	}
 
 	/**
@@ -143,11 +150,12 @@ class Mystique_Extra_Nav_Icons {
 	function options_page() {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
 
+		list( $en_order, $dis_order) = $this->get_ordered_list();
 
 		echo "<ul id='meni_enabled_icons' class='iconSortable'>\n";
 		// Get the visible smilies in the (eventually) custom order
-		foreach ( $this->default_icons as $icon ) {
-			echo "<li id='sttelement|$image'><img src='{$this->plugin_url}/icons/nav-$icon.png'";
+		foreach ( $en_order as $icon => $url ) {
+			echo "<li id='sttelement|$icon'><img src='{$this->plugin_url}/icons/nav-$icon.png'";
 			echo " class='wp-smiley'";
 			echo " alt='" . str_replace( "'", '&#039;', $text ) . "'";
 			echo " title='" . str_replace( "'", '&#039;', $text ) . "'";
@@ -171,7 +179,13 @@ class Mystique_Extra_Nav_Icons {
 
 		echo '<h3>' . __( "Disabled icons:", $this->plugin_slug ) . '</h3>';
 		echo "<ul id='meni_disabled_icons' class='iconSortable'>\n";
-		#$this->__print_ordered_smilies( $sm[1] );
+		foreach ( $dis_order as $icon => $url ) {
+			echo "<li id='sttelement|$icon'><img src='{$this->plugin_url}/icons/nav-$icon.png'";
+			echo " class='wp-smiley'";
+			echo " alt='" . str_replace( "'", '&#039;', $text ) . "'";
+			echo " title='" . str_replace( "'", '&#039;', $text ) . "'";
+			echo " /></li>\n";
+		}
 		echo "</ul>";
 
 
@@ -192,9 +206,9 @@ class Mystique_Extra_Nav_Icons {
 var meni_urls = {
 <?php
 	$temp = array();
-	foreach ( $this->default_icons as $icon ) {
-		// TODO: print the default URL or the saved one.
-		$temp[] = "$icon: '$icon'";
+	$urls = $this->merge_urls_from_db();
+	foreach ( $urls as $icon => $url ) {
+		$temp[] = "$icon: '" . urlencode( $url ) . "'";
 	}
 	echo implode( ",\n", $temp);
 ?>
@@ -219,10 +233,10 @@ var meni_selected_icon;
 				url: 'admin-ajax.php',
 				traditional: true,
 				data: {
-					'sttenabled[]': enabled_order,
-					'sttdisabled[]': disabled_order,
-					action: 'stt_saveorder',
-					_ajax_nonce: '<?php echo wp_create_nonce( 'stt_order' ) ?>'
+					'meni_enabled[]': enabled_order,
+					'meni_disabled[]': disabled_order,
+					action: 'meni_saveorder',
+					_ajax_nonce: '<?php echo wp_create_nonce( 'meni_order' ) ?>'
 				},
 				success: function(data) {
 					$("#meni_saving").css('visibility', 'hidden');
@@ -249,6 +263,83 @@ var meni_selected_icon;
 <?php
 		echo '</div>';
 	}
+
+
+	function merge_urls_from_db() {
+		$list = $this->default_icons;
+		$saved_list = $this->get_option( 'urls' );
+		if ( $saved_list && is_array( $saved_list ) ) {
+			// I already have some settings saved
+			foreach ( $saved_list as $key => $value ) {
+				if ( array_key_exists( $key, $list ) )
+					$list[$key] = $value;
+			}
+		}
+		return $list;
+	}
+
+
+/**
+	 * Returns the list of the icons. If a custom order is set, they will
+	 * be returned in that order.
+	 * 
+	 * @return array Double list of visible + disabled icons:
+	 * $result[0] = visible
+	 * $result[1] = disabled
+	 */
+	function get_ordered_list() {
+		// $result[0]: visible ones
+		// $result[1]: disabled ones
+		$result = array( array(), array() );
+		$urls = $this->merge_urls_from_db();
+
+		$en_order = $this->get_option( 'enabled_order' );
+		// Have I saved the icon order into the database?
+		if ( is_array( $en_order ) ) {
+			/* Visible icons ($result[0]) */
+			foreach ( $en_order as $code ) {
+				if ( array_key_exists( $code, $urls ) )
+					$result[0][$code] = $urls[$code];
+			}
+
+			/* Disabled icons ($result[1]) */
+			$dis_order = $this->get_option( 'disabled_order' );
+			if ( is_array( $dis_order ) ) {
+				foreach ( $dis_order as $code ) {
+					if ( array_key_exists( $code, $urls ) )
+						$result[1][$code] = $urls[$code];
+				}
+			}
+			/* Icons that aren't in any array (errors?)
+			 * Added to disabled icons ($result[1]) */
+			foreach ( $urls as $code => $url ) {
+				if ( ! array_key_exists( $code, $result[0] ) &&
+				     ! array_key_exists( $code, $result[1] ) ) {
+					$result[1][$code] = $url;
+				}
+			}
+			return $result;
+		}
+		else {
+			// No order set. Return the default order.
+			$result[1] = $urls;
+			return $result;
+		}
+	}
+
+
+/**
+	 * Receives the order through Ajax, and saves it to the database.
+	 */
+	function save_ajax_order() {
+		check_ajax_referer( 'meni_order' );
+		if ( ! current_user_can( 'manage_options' ) ) die( '1' );
+
+		$this->update_option( 'enabled_order', $_POST['meni_enabled'] );
+		$this->update_option( 'disabled_order', $_POST['meni_disabled'] );
+		die( '0' );
+	}
+
 
 	/**
 	 * Returns the url for the configuration page.
@@ -279,5 +370,9 @@ add_action( 'mystique_navigation_extra', array( &$mystique_eni, 'get_nav' ), 20 
 // Add settings menu to admin interface
 add_action( 'admin_menu', array( &$mystique_eni, 'admin_menu' ) );
 add_filter( 'plugin_action_links', array( &$mystique_eni, 'add_action_link' ) );
+
+
+// Manage ajax communications when ordering icons (admin only)
+add_action( 'wp_ajax_meni_saveorder', array( &$mystique_eni, 'save_ajax_order' ) );
 
 ?>
