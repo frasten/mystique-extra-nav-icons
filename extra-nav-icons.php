@@ -156,7 +156,14 @@ class Mystique_Extra_Nav_Icons {
 		echo "</ul>\n";
 
 		echo "<div class='meni_icon_settings'>";
+		echo "<div id='meni_url_form'>";
+		echo "<span></span>";
 		echo "<input type='text' id='meni_url_textbox' />";
+		echo "</div>";
+		echo "<div id='meni_saving'>";
+		echo "<img src='{$this->plugin_url}/ajax-loader.gif' alt='Loading' /> ";
+		_e( 'Saving...' );
+		echo "</div>";
 		echo "</div>";
 
 
@@ -173,10 +180,12 @@ class Mystique_Extra_Nav_Icons {
 	.iconSortable { list-style-type: none; margin: 10px 10px 20px; padding: 5px; width: 50%;min-height: 20px;}
 	.iconSortable img {cursor: move;}
 	.iconSortableSelected {background-color: #F2F4FF;border-color: #8d9dff !important;}
-	.meni_icon_settings {float: left; background-color: red;margin-top: 10px;margin-left: 20px;padding: 5px;border: 1px solid #666;background-color: #ddd;}
 	#meni_enabled_icons {background-color: #cfc;border: 1px solid #8a8;float: left;}
 	#meni_disabled_icons {background-color: #aaa;border: 1px solid #666;float: left;}
 	#meni_enabled_icons li, #meni_disabled_icons li { margin: 3px 3px 3px 0; padding: 1px; display: block; float: left; border: 1px solid #ddd}
+	#meni_url_form {padding: 5px;border: 1px solid #666;background-color: #ddd;}
+	#meni_saving {visibility: hidden;}
+	.meni_icon_settings {float: left; margin-top: 10px;margin-left: 20px;}
 </style>
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -204,7 +213,7 @@ var meni_selected_icon;
 			for (i = 0;i < disabled_order.length;i++) {
 				disabled_order[i] = disabled_order[i].split('|')[1]
 			}
-			$("#stt_ajax_status").css('visibility', '');
+			$("#meni_saving").css('visibility', '');
 			$.ajax({
 				type: 'post',
 				url: 'admin-ajax.php',
@@ -216,7 +225,7 @@ var meni_selected_icon;
 					_ajax_nonce: '<?php echo wp_create_nonce( 'stt_order' ) ?>'
 				},
 				success: function(data) {
-					$("#stt_ajax_status").css('visibility', 'hidden');
+					$("#meni_saving").css('visibility', 'hidden');
 				}
 			});
 		}
@@ -228,6 +237,7 @@ var meni_selected_icon;
 		var url = $(this).attr('src');
 		meni_selected_icon = /\/nav-(.+)\.png$/.exec(url)[1];
 		$("#meni_url_textbox").val(meni_urls[meni_selected_icon]);
+		$(".meni_icon_settings span").html("");
 	});
 
 	$("#meni_url_textbox").keyup(function (e) {
