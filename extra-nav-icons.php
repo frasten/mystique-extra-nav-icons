@@ -152,6 +152,7 @@ class Mystique_Extra_Nav_Icons {
 
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
+		echo '<h3>' . __( "Enabled icons:", $this->plugin_slug ) . '</h3>';
 		echo "<ul id='meni_enabled_icons' class='iconSortable'>\n";
 		// Get the visible smilies in the (eventually) custom order
 		foreach ( $en_order as $icon => $url ) {
@@ -196,10 +197,10 @@ class Mystique_Extra_Nav_Icons {
 	.iconSortableSelected {background-color: #F2F4FF;border-color: #8d9dff !important;}
 	#meni_enabled_icons {background-color: #cfc;border: 1px solid #8a8;float: left;}
 	#meni_disabled_icons {background-color: #aaa;border: 1px solid #666;float: left;}
-	#meni_enabled_icons li, #meni_disabled_icons li { margin: 3px 3px 3px 0; padding: 1px; display: block; float: left; border: 1px solid #ddd}
+	#meni_enabled_icons li, #meni_disabled_icons li { margin: 3px 3px 3px 0; padding: 1px; display: block; float: left; border: 1px solid #ddd;border-radius: 4px;}
 	#meni_url_form {padding: 5px;border: 1px solid #666;background-color: #ddd;}
-	#meni_saving {visibility: hidden;}
-	.meni_icon_settings {float: left; margin-top: 10px;margin-left: 20px;}
+	#meni_saving {display: none;margin-top: 4px;}
+	.meni_icon_settings {float: left; margin-top: 10px;margin-left: 20px;width: 40%;}
 </style>
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -227,7 +228,7 @@ var meni_selected_icon;
 			for (i = 0;i < disabled_order.length;i++) {
 				disabled_order[i] = disabled_order[i].split('|')[1]
 			}
-			$("#meni_saving").css('visibility', '');
+			$("#meni_saving").show();
 			$.ajax({
 				type: 'post',
 				url: 'admin-ajax.php',
@@ -239,7 +240,7 @@ var meni_selected_icon;
 					_ajax_nonce: '<?php echo wp_create_nonce( 'meni_order' ) ?>'
 				},
 				success: function(data) {
-					$("#meni_saving").css('visibility', 'hidden');
+					$("#meni_saving").hide();
 				}
 			});
 		}
@@ -254,8 +255,28 @@ var meni_selected_icon;
 		$(".meni_icon_settings span").html("");
 	});
 
+	var meni_keypress_timeout;
 	$("#meni_url_textbox").keyup(function (e) {
 		meni_urls[meni_selected_icon] = $("#meni_url_textbox").val();
+		if (meni_keypress_timeout != undefined) {
+			clearTimeout(meni_keypress_timeout);
+		}
+		meni_keypress_timeout = setTimeout(function() {
+			meni_keypress_timeout = undefined;
+			$("#meni_saving").show();
+			meni_urls.action = 'meni_saveurls';
+			meni_urls._ajax_nonce = '<?php echo wp_create_nonce( 'meni_urls' ) ?>';
+			$.ajax({
+				type: 'post',
+				url: 'admin-ajax.php',
+				data: meni_urls,
+				success: function(data) {
+					$("#meni_saving").hide();
+				}
+			});
+		}, 500);
+
+
 	})
 })(jQuery);
 /* ]]> */
@@ -328,7 +349,7 @@ var meni_selected_icon;
 	}
 
 
-/**
+	/**
 	 * Receives the order through Ajax, and saves it to the database.
 	 */
 	function save_ajax_order() {
@@ -337,6 +358,23 @@ var meni_selected_icon;
 
 		$this->update_option( 'enabled_order', $_POST['meni_enabled'] );
 		$this->update_option( 'disabled_order', $_POST['meni_disabled'] );
+		die( '0' );
+	}
+
+
+	/**
+	 * Receives the urls through Ajax, and saves them to the database.
+	 */
+	function save_ajax_urls() {
+		check_ajax_referer( 'meni_urls' );
+		if ( ! current_user_can( 'manage_options' ) ) die( '1' );
+
+		$urls = $this->merge_urls_from_db();
+		foreach ( $_POST as $key => $value ) {
+			if ( array_key_exists( $key, $urls ) )
+				$urls[$key] = $value;
+		}
+		$this->update_option( 'urls', $urls );
 		die( '0' );
 	}
 
@@ -374,5 +412,8 @@ add_filter( 'plugin_action_links', array( &$mystique_eni, 'add_action_link' ) );
 
 // Manage ajax communications when ordering icons (admin only)
 add_action( 'wp_ajax_meni_saveorder', array( &$mystique_eni, 'save_ajax_order' ) );
+
+// ... and when saving urls
+add_action( 'wp_ajax_meni_saveurls', array( &$mystique_eni, 'save_ajax_urls' ) );
 
 ?>
