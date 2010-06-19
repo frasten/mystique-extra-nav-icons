@@ -155,6 +155,11 @@ class Mystique_Extra_Nav_Icons {
 		}
 		echo "</ul>\n";
 
+		echo "<div class='meni_icon_settings'>";
+		echo "<input type='text' id='meni_url_textbox' />";
+		echo "</div>";
+
+
 		echo "<br style='clear:both'/>\n";
 
 		echo '<h3>' . __( "Disabled icons:", $this->plugin_slug ) . '</h3>';
@@ -168,12 +173,25 @@ class Mystique_Extra_Nav_Icons {
 	.iconSortable { list-style-type: none; margin: 10px 10px 20px; padding: 5px; width: 50%;min-height: 20px;}
 	.iconSortable img {cursor: move;}
 	.iconSortableSelected {background-color: #F2F4FF;border-color: #8d9dff !important;}
+	.meni_icon_settings {float: left; background-color: red;margin-top: 10px;margin-left: 20px;padding: 5px;border: 1px solid #666;background-color: #ddd;}
 	#meni_enabled_icons {background-color: #cfc;border: 1px solid #8a8;float: left;}
 	#meni_disabled_icons {background-color: #aaa;border: 1px solid #666;float: left;}
 	#meni_enabled_icons li, #meni_disabled_icons li { margin: 3px 3px 3px 0; padding: 1px; display: block; float: left; border: 1px solid #ddd}
 </style>
 <script type="text/javascript">
 /* <![CDATA[ */
+var meni_urls = {
+<?php
+	$temp = array();
+	foreach ( $this->default_icons as $icon ) {
+		// TODO: print the default URL or the saved one.
+		$temp[] = "$icon: '$icon'";
+	}
+	echo implode( ",\n", $temp);
+?>
+};
+var meni_selected_icon;
+
 (function($) {
 	$("#meni_enabled_icons, #meni_disabled_icons").sortable({
 		connectWith: '.iconSortable',
@@ -207,7 +225,14 @@ class Mystique_Extra_Nav_Icons {
 	$("#meni_enabled_icons img, #meni_disabled_icons img").click(function() {
 		$("#meni_enabled_icons li, #meni_disabled_icons li").removeClass('iconSortableSelected');
 		$(this).parent().addClass('iconSortableSelected');
+		var url = $(this).attr('src');
+		meni_selected_icon = /\/nav-(.+)\.png$/.exec(url)[1];
+		$("#meni_url_textbox").val(meni_urls[meni_selected_icon]);
 	});
+
+	$("#meni_url_textbox").keyup(function (e) {
+		meni_urls[meni_selected_icon] = $("#meni_url_textbox").val();
+	})
 })(jQuery);
 /* ]]> */
 </script>
