@@ -10,14 +10,22 @@ $dirpath = realpath( $dirpath );
 // Read the .png files in the directory
 $handle = opendir( $dirpath );
 $icon_files = array();
+
+// Hack
+if ( is_file( "$dirpath/nav-source_forge copy.png" ) )
+	rename( "$dirpath/nav-source_forge copy.png", "$dirpath/nav-sourceforge.png" );
+
 while ( false !== ( $file = readdir( $handle ) ) ) {
 	if ( is_dir( "$dirpath/$file" ) ) continue;
 	if ( ! preg_match( "/\.png$/i", $file ) ) continue;
 	// Don't want to include this:
 	if ( $file == 'nav-icons1.png' ) continue;
 	$icon_files[] = "$dirpath/$file";
+	preg_match( "#nav-(.+)\.png$#i", $file, $match);
+	echo "\t\t'{$match[1]}',\n";
 }
 closedir($handle);
+sort( $icon_files );
 
 $num_icons = sizeof( $icon_files );
 $row_size = 6;
