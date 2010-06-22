@@ -478,8 +478,8 @@ var meni_selected_icon;
 
 
 	function load_sprites_css() {
-		if ( is_file( $this->plugin_dir . '/sprite.css' ) ) {
-			wp_enqueue_style( 'meni-sprites', $this->plugin_url . '/sprite.css' );
+		if ( is_file( $this->plugin_dir . '/sprites/sprite.css' ) ) {
+			wp_enqueue_style( 'meni-sprites', $this->plugin_url . '/sprites/sprite.css' );
 		}
 	}
 
