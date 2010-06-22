@@ -10,6 +10,8 @@ Author URI: http://polpoinodroidi.com
 License: GPL3
 */
 
+require_once( 'create-sprites.php' );
+
 /* Internal data structure */
 if ( ! class_exists( 'MENI_Icon' ) ):
 class MENI_Icon {
@@ -35,6 +37,7 @@ class Mystique_Extra_Nav_Icons {
 	function init() {
 		$dir = basename(dirname(__FILE__));
 		$this->plugin_url = WP_PLUGIN_URL . "/$dir";
+		$this->plugin_dir = WP_PLUGIN_DIR . "/$dir";
 
 		$this->default_icons = array(
 			new MENI_Icon( 'android', '', '' ),
@@ -93,9 +96,10 @@ class Mystique_Extra_Nav_Icons {
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
 		$nav_extra = '';
-		foreach ( $en_order as $icon ) {
+		for ( $i = sizeof( $en_order ) - 1; $i >= 0; $i-- ) {
+			$icon = $en_order[$i];
 			$nav_extra .= "<a href='" . esc_attr( $icon->url ) .
-				"' class='nav-extra nav-{$icon->name}' title='" .
+				"' class='nav-extra meni-{$icon->name}' title='" .
 				esc_attr( $icon->text ) . "'><span>" .
 				esc_html( $icon->text ) . "</span></a>\n";
 		}
@@ -103,6 +107,7 @@ class Mystique_Extra_Nav_Icons {
 		return $nav_extra;
 	}
 
+// TODO: this should be removed
 	function get_css() {
 		$css = $this->get_option( 'css' );
 		if ( $css ) return $css;
@@ -428,6 +433,10 @@ var meni_selected_icon;
 
 		$this->update_option( 'enabled_order', $_POST['meni_enabled'] );
 		$this->update_option( 'disabled_order', $_POST['meni_disabled'] );
+		// TODO: only call this when necessary (the icons have changed)
+		// Note: if only the order has changed, it is not necessary to rebuild
+		// the sprites.
+		MENI_update_sprites();
 		die( '0' );
 	}
 
@@ -467,6 +476,14 @@ var meni_selected_icon;
 		return admin_url( 'options-general.php?page=' . $this->plugin_slug );
 	}
 
+
+	function load_sprites_css() {
+		if ( is_file( $this->plugin_dir . '/sprite.css' ) ) {
+			wp_enqueue_style( 'meni-sprites', $this->plugin_url . '/sprite.css' );
+		}
+	}
+
+
 } /* end Mystique_Extra_Nav_Icons class */
 endif;
 
@@ -490,5 +507,7 @@ add_action( 'wp_ajax_meni_saveorder', array( &$mystique_eni, 'save_ajax_order' )
 
 // ... and when saving urls
 add_action( 'wp_ajax_meni_saveicons', array( &$mystique_eni, 'save_ajax_icons' ) );
+
+add_action( 'template_redirect', array( &$mystique_eni, 'load_sprites_css' ) );
 
 ?>
