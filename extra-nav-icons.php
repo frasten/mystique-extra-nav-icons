@@ -186,27 +186,29 @@ class Mystique_Extra_Nav_Icons {
 	function options_page() {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
 
-		list( $en_order, $dis_order) = $this->get_ordered_list();
+		echo '<p>';
+		_e( "Drag and drop the icons to change their order. ", $this->plugin_slug );
+		_e( "Move them to the bottom box to hide them.", $this->plugin_slug );
+		echo '<br />';
+		_e( "In the right box you can edit the URL and the mouseover text.", $this->plugin_slug );
+		echo '</p><p><em>';
+		_e( "Note: the changes are saved everytime you make them.", $this->plugin_slug );
+		echo '</em></p>';
+
+
+		list( $en_order, $dis_order ) = $this->get_ordered_list();
 
 		echo '<h3>' . __( "Enabled icons:", $this->plugin_slug ) . '</h3>';
 		echo "<ul id='meni_enabled_icons' class='iconSortable'>\n";
 		// Get the visible icons in the (eventually) custom order
-		// TODO: Avoid duplicating this, put it into a function
-		foreach ( $en_order as $icon ) {
-			echo "<li id='menielement|{$icon->name}'>";
-			echo "<img src='{$this->plugin_url}/icons/nav-{$icon->name}.png'";
-			// TODO: also update alt&title on change, if it's worthwhile
-			echo " alt='" . esc_attr( $icon->text ) . "'";
-			echo " title='" . esc_attr( $icon->text ) . "'";
-			echo " /></li>\n";
-		}
+		$this->_print_icon_list( $en_order );
 		echo "</ul>\n";
 
 		echo "<div class='meni_icon_settings'>";
 		echo "<div id='meni_url_form'>";
-		echo "<span></span>";
-		echo "<input type='text' id='meni_url_textbox' /><br/>";
-		echo "<input type='text' id='meni_text_textbox' />";
+		echo "<span>" . __( 'Selected icon: ',  $this->plugin_slug ) . __( 'none',  $this->plugin_slug ) . "</span><br />";
+		echo __( 'Url', $this->plugin_slug ) . ": <input type='text' id='meni_url_textbox' /><br/>";
+		echo __( 'Text on mouseover', $this->plugin_slug ) . ": <input type='text' id='meni_text_textbox' />";
 		echo "</div>";
 		echo "<div id='meni_saving'>";
 		echo "<img src='{$this->plugin_url}/ajax-loader.gif' alt='Loading' /> ";
@@ -219,13 +221,7 @@ class Mystique_Extra_Nav_Icons {
 
 		echo '<h3>' . __( "Disabled icons:", $this->plugin_slug ) . '</h3>';
 		echo "<ul id='meni_disabled_icons' class='iconSortable'>\n";
-		foreach ( $dis_order as $icon ) {
-			echo "<li id='menielement|{$icon->name}'>";
-			echo "<img src='{$this->plugin_url}/icons/nav-{$icon->name}.png'";
-			echo " alt='" . esc_attr( $icon->text ) . "'";
-			echo " title='" . esc_attr( $icon->text ) . "'";
-			echo " /></li>\n";
-		}
+		$this->_print_icon_list( $dis_order );
 		echo "</ul>";
 
 
@@ -240,7 +236,7 @@ class Mystique_Extra_Nav_Icons {
 	#meni_url_form {padding: 5px;border: 1px solid #666;background-color: #ddd;}
 	#meni_saving {display: none;margin-top: 4px;}
 	.meni_icon_settings {float: left; margin-top: 10px;margin-left: 20px;width: 40%;}
-	#meni_url_textbox, #meni_text_textbox {width: 100%;}
+	#meni_url_textbox, #meni_text_textbox {width: 100%}
 </style>
 <script type="text/javascript">
 /* <![CDATA[ */
@@ -255,6 +251,9 @@ var meni_icons = {
 	echo implode( ",\n", $temp);
 ?>
 };
+var meni_text = {
+	caption_text: "<?php _e( 'Selected icon: ', $this->plugin_slug ) ?>"
+}
 var meni_selected_icon;
 
 (function($) {
@@ -296,7 +295,7 @@ var meni_selected_icon;
 		$("#meni_text_textbox").val(meni_icons[meni_selected_icon][1]);
 		meni_oldvalue[0] = meni_icons[meni_selected_icon][0];
 		meni_oldvalue[1] = meni_icons[meni_selected_icon][1];
-		$(".meni_icon_settings span").html("");
+		$("#meni_url_form span").html(meni_text.caption_text + meni_selected_icon);
 	});
 
 	var meni_keypress_timeout;
@@ -339,6 +338,18 @@ var meni_selected_icon;
 </script>
 <?php
 		echo '</div>';
+	}
+
+
+	function _print_icon_list( $list ) {
+		foreach ( $list as $icon ) {
+			echo "<li id='menielement|{$icon->name}'>\n";
+			echo "<img src='{$this->plugin_url}/icons/nav-{$icon->name}.png'";
+			// TODO: also update alt&title on change, if it's worthwhile
+			echo " alt='" . esc_attr( $icon->text ) . "'";
+			echo " title='" . esc_attr( $icon->text ) . "'";
+			echo " />\n</li>\n";
+		}
 	}
 
 
