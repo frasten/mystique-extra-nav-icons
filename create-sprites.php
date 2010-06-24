@@ -1,7 +1,4 @@
 <?php
-/* TODO: including all the images results in a huge sprite (280kB),
- * so I should include only the icons chosen by the user. */
-
 
 function MENI_update_sprites() {
 	global $mystique_eni;
@@ -21,6 +18,7 @@ function MENI_update_sprites() {
 	$num_icons = sizeof( $icon_files );
 	$row_size = 6;
 
+	/* Put it in a bidimensional matrix. */
 	$icon_matrix = array();
 	$cur_row = -1;
 	for ( $i = 0; $i < $num_icons; $i++ ) {
