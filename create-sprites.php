@@ -18,7 +18,7 @@ function MENI_update_sprites() {
 	$num_icons = sizeof( $icon_files );
 	$row_size = 6;
 
-	/* Put it in a bidimensional matrix. */
+	/* Put it into a bidimensional matrix. */
 	$icon_matrix = array();
 	$cur_row = -1;
 	for ( $i = 0; $i < $num_icons; $i++ ) {
