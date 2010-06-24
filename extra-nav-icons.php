@@ -28,14 +28,16 @@ class MENI_Icon {
 endif;
 
 
+/* Main class */
 if ( ! class_exists( 'Mystique_Extra_Nav_Icons' ) ):
 class Mystique_Extra_Nav_Icons {
 	var $plugin_slug = 'mystique-extra-nav-icons';
 	var $plugin_url;
 	var $default_icons;
 
+	/* Initialize variables */
 	function init() {
-		$dir = basename(dirname(__FILE__));
+		$dir = basename( dirname( __FILE__ ) );
 		$this->plugin_url = WP_PLUGIN_URL . "/$dir";
 		$this->plugin_dir = WP_PLUGIN_DIR . "/$dir";
 
@@ -91,11 +93,13 @@ class Mystique_Extra_Nav_Icons {
 	}
 
 
+	/**/
 	function get_nav( $nav_extra ) {
 		// TODO: choose some default values to show
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
 		$nav_extra = '';
+		// In reverse order, because they are floated right.
 		for ( $i = sizeof( $en_order ) - 1; $i >= 0; $i-- ) {
 			$icon = $en_order[$i];
 			$nav_extra .= "<a href='" . esc_attr( $icon->url ) .
@@ -107,19 +111,10 @@ class Mystique_Extra_Nav_Icons {
 		return $nav_extra;
 	}
 
-// TODO: this should be removed
-	function get_css() {
-		$css = $this->get_option( 'css' );
-		if ( $css ) return $css;
 
-		// TODO: If no CSS rule is already set, we generate some default settings
-		/*
-		 * #header p.nav-extra {top:-46px;height:54px;}
-		#header a.nav-extra {height:60px;}
-		#header a.nav-extra.rss{background:url("/wp-content/uploads/mystique_icons/nav-rss.png") no-repeat scroll right top transparent;}
-	*/
-	}
-
+	/*
+	 * Returns a single variable from this plugin's settings.
+	 */
 	function get_option( $name ) {
 		$settings = get_option( $this->plugin_slug );
 		if ( array_key_exists( $name, $settings ) )
@@ -129,6 +124,9 @@ class Mystique_Extra_Nav_Icons {
 	}
 
 
+	/*
+	 * Updates a single variable in this plugin's settings.
+	 */
 	function update_option( $key, $value ) {
 		$settings = get_option( $this->plugin_slug );
 		$settings[$key] = $value;
@@ -185,6 +183,8 @@ class Mystique_Extra_Nav_Icons {
 
 	function options_page() {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
+
+		// TODO: check if the sprites directory is writable.
 
 		echo '<p>';
 		_e( "Drag and drop the icons to change their order. ", $this->plugin_slug );
@@ -252,7 +252,7 @@ var meni_icons = {
 ?>
 };
 var meni_text = {
-	caption_text: "<?php _e( 'Selected icon: ', $this->plugin_slug ) ?>"
+	caption_text: "<?php echo addslashes( __( 'Selected icon:', $this->plugin_slug ) ) ?> "
 }
 var meni_selected_icon;
 
@@ -331,16 +331,17 @@ var meni_selected_icon;
 			});
 		}, 500);
 
-
 	})
 })(jQuery);
 /* ]]> */
 </script>
 <?php
 		echo '</div>';
-	}
+	} /* end admin page */
 
 
+	/*
+	 * It outputs a list of icons. Used only internally. */
 	function _print_icon_list( $list ) {
 		foreach ( $list as $icon ) {
 			echo "<li id='menielement|{$icon->name}'>\n";
@@ -353,6 +354,10 @@ var meni_selected_icon;
 	}
 
 
+	/* It merges the default settings with saved settings.
+	 * 
+	 * @return array the list of icon data.
+	 * */
 	function merge_icons_from_db() {
 		$output_list = $this->default_icons;
 		$saved_list = $this->get_option( 'icons' );
@@ -447,8 +452,8 @@ var meni_selected_icon;
 		$new_order = $_POST['meni_enabled'];
 		$this->update_option( 'enabled_order', $new_order );
 		$this->update_option( 'disabled_order', $_POST['meni_disabled'] );
-		// TODO: only call this when necessary (the icons have changed)
-		// Note: if only the order has changed, it is not necessary to rebuild
+
+		// If only the order has changed, it is not necessary to rebuild
 		// the sprites.
 		$equals = true;
 		sort( $old_order );
@@ -472,7 +477,7 @@ var meni_selected_icon;
 
 
 	/**
-	 * Receives the urls through Ajax, and saves them to the database.
+	 * Receives the icon data through Ajax, and saves them to the database.
 	 */
 	function save_ajax_icons() {
 		check_ajax_referer( 'meni_icons' );
@@ -507,6 +512,7 @@ var meni_selected_icon;
 	}
 
 
+	/* It loads the CSS file for the sprites. */
 	function load_sprites_css() {
 		if ( is_file( $this->plugin_dir . '/sprites/sprite.css' ) ) {
 			wp_enqueue_style( 'meni-sprites', $this->plugin_url . '/sprites/sprite.css' );
