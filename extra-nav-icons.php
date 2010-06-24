@@ -431,12 +431,31 @@ var meni_selected_icon;
 		check_ajax_referer( 'meni_order' );
 		if ( ! current_user_can( 'manage_options' ) ) die( '1' );
 
-		$this->update_option( 'enabled_order', $_POST['meni_enabled'] );
+		$old_order = $this->get_option( 'enabled_order' );
+
+		$new_order = $_POST['meni_enabled'];
+		$this->update_option( 'enabled_order', $new_order );
 		$this->update_option( 'disabled_order', $_POST['meni_disabled'] );
 		// TODO: only call this when necessary (the icons have changed)
 		// Note: if only the order has changed, it is not necessary to rebuild
 		// the sprites.
-		MENI_update_sprites();
+		$equals = true;
+		sort( $old_order );
+		sort( $new_order );
+		if ( sizeof( $old_order ) == sizeof( $new_order ) ) {
+			foreach ( $old_order as $i => $icon ) {
+				if ( $new_order[$i] != $icon ) {
+					$equals = false;
+					break;
+				}
+			}
+		}
+		else
+			$equals = false;
+		if ( ! $equals ) {
+			MENI_update_sprites();
+		}
+
 		die( '0' );
 	}
 
