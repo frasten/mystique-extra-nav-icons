@@ -88,6 +88,8 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'youtube', 'http://www.youtube.com/user/YOUR_USERNAME', '' ),
 		);
 
+		// TODO: choose some default values to show
+
 		// FOR DEBUG PURPOSES:
 		//delete_option($this->plugin_slug);
 	}
@@ -95,7 +97,6 @@ class Mystique_Extra_Nav_Icons {
 
 	/**/
 	function get_nav( $nav_extra ) {
-		// TODO: choose some default values to show
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
 		$nav_extra = '';
@@ -245,8 +246,8 @@ var meni_icons = {
 	$temp = array();
 	$icons = $this->merge_icons_from_db();
 	foreach ( $icons as $icon ) {
-		$temp[] = "{$icon->name}: new Array('" . esc_attr( $icon->url ) . "', '" .
-		  esc_attr( $icon->text ) . "')";
+		$temp[] = "\t{$icon->name}: new Array('" . addslashes( $icon->url ) . "', '" .
+		  addslashes( $icon->text ) . "')";
 	}
 	echo implode( ",\n", $temp);
 ?>
@@ -484,6 +485,9 @@ var meni_selected_icon;
 		if ( ! current_user_can( 'manage_options' ) ) die( '1' );
 
 		$icons = $this->merge_icons_from_db();
+		// Avoid getting slashed quotes
+		$_POST = stripslashes_deep( $_POST );
+
 		$name = $_POST['name'];
 		foreach ( $icons as $i => $icon ) {
 			if ( $icon->name == $name ) {
