@@ -459,24 +459,24 @@ var meni_selected_icon;
 		}
 		if ( ! $ok ) {
 			if ( $echo )
-				$this->show_error( sprint( __( "Error: your <code>%s</code> directory hasn't write permissions. You can either <a href='%s'>make it writable</a> or manually create a <code>%s</code> directory with write permissions inside it." ) , $this->plugin_dir, $codex_page_url, $this->sprites_subfolder ) );
+				$this->show_error( sprintf( __( "Error: your <code>%s</code> directory hasn't write permissions. You can either <a href='%s'>make it writable</a> or manually create a <code>%s</code> directory with write permissions inside it." ) , $this->plugin_dir, $codex_page_url, $this->sprites_subfolder ) );
 			return false;
 		}
 
 		if ( is_writable( $this->sprites_dir ) ) {
 			$file = $this->sprites_dir . '/sprites.png';
 			if ( is_file( $file ) && ! is_writable( $file ) ) {
-				if ( $echo ) $this->show_error( sprint( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $file, $codex_page_url ) );
+				if ( $echo ) $this->show_error( sprintf( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $file, $codex_page_url ) );
 				return false;
 			}
 			$file = $this->sprites_dir . '/sprites.css';
 			if ( is_file( $file ) && ! is_writable( $file ) ) {
-				if ( $echo ) $this->show_error( sprint( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $file, $codex_page_url ) );
+				if ( $echo ) $this->show_error( sprintf( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $file, $codex_page_url ) );
 				return false;
 			}
 		}
 		else {
-			if ( $echo ) $this->show_error( sprint( __( "Error: your <code>%s</code> directory hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $this->sprites_dir, $codex_page_url ) );
+			if ( $echo ) $this->show_error( sprintf( __( "Error: your <code>%s</code> directory hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $this->sprites_dir, $codex_page_url ) );
 			return false;
 		}
 		return true;
