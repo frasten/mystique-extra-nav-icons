@@ -17,7 +17,6 @@ TODO: credits
 
 1. Upload files to your `/wp-content/plugins/` directory (preserve sub-directory structure)
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Remove 
 1. Customize your icons going to Settings -- Mystique Nav Icons
 
 

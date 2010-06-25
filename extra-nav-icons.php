@@ -95,7 +95,7 @@ class Mystique_Extra_Nav_Icons {
 	}
 
 
-	/**/
+	/* Outputs the navigation bar on every page. */
 	function get_nav( $nav_extra ) {
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
@@ -182,6 +182,7 @@ class Mystique_Extra_Nav_Icons {
 	}
 
 
+	/* The administration page of this plugin. */
 	function options_page() {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
 
