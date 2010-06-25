@@ -92,8 +92,8 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'youtube', 'http://www.youtube.com/user/YOUR_USERNAME', '' ),
 		);
 
-		$this->sprites_dir = $this->plugin_dir . '/' . sprites_subfolder;
-		$this->sprites_url = $this->plugin_url . '/' . sprites_subfolder;;
+		$this->sprites_dir = $this->plugin_dir . '/' . $this->sprites_subfolder;
+		$this->sprites_url = $this->plugin_url . '/' . $this->sprites_subfolder;
 
 		// TODO: choose some default values to show
 
