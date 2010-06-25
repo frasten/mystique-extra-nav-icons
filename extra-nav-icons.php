@@ -97,6 +97,12 @@ class Mystique_Extra_Nav_Icons {
 
 		// TODO: choose some default values to show
 
+		// Regenerate sprites they're missing
+		if ( $this->check_sprites_dir( false ) && ( ! is_file( "{$this->sprites_dir}/sprite.png" ) || ! is_file( "{$this->sprites_dir}/sprite.css" ) ) ) {
+			MENI_update_sprites();
+		}
+
+
 		// FOR DEBUG PURPOSES:
 		//delete_option($this->plugin_slug);
 	}
@@ -515,7 +521,7 @@ var meni_selected_icon;
 		}
 		else
 			$equals = false;
-		if ( ! $equals ) {
+		if ( ! $equals || ! is_file( "{$this->sprites_dir}/sprite.png" ) || ! is_file( "{$this->sprites_dir}/sprite.css" ) ) {
 			MENI_update_sprites();
 		}
 
