@@ -2,7 +2,7 @@
 /*
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://polpoinodroidi.com/wordpress-plugins/mystique-extra-navigation-icons/
-Description: 
+Description:
 Version: 0.1
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
@@ -179,7 +179,7 @@ class Mystique_Extra_Nav_Icons {
 
 	/**
 	 * Adds a link to the configuration page in the plugins list.
-	 * 
+	 *
 	 * Directly called by filter 'plugin_action_links'.
 	 */
 	function add_action_link( $links, $file ) {
@@ -370,7 +370,7 @@ var meni_selected_icon;
 
 
 	/* It merges the default settings with saved settings.
-	 * 
+	 *
 	 * @return array the list of icon data.
 	 * */
 	function merge_icons_from_db() {
@@ -397,7 +397,7 @@ var meni_selected_icon;
 /**
 	 * Returns the list of the icons. If a custom order is set, they will
 	 * be returned in that order.
-	 * 
+	 *
 	 * @return array Double list of visible + disabled icons:
 	 * $result[0] = visible
 	 * $result[1] = disabled
@@ -556,7 +556,7 @@ var meni_selected_icon;
 
 	/**
 	 * Returns the url for the configuration page.
-	 * 
+	 *
 	 * @return string The URL for the configuration page.
 	 */
 	function plugin_options_url() {
