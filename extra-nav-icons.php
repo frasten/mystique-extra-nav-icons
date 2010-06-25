@@ -193,10 +193,7 @@ class Mystique_Extra_Nav_Icons {
 	function options_page() {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
 
-		// TODO: check if the sprites directory is writable.
-		if () {
-			
-		}
+		$this->check_sprites_dir();
 
 		echo '<p>';
 		_e( "Drag and drop the icons to change their order. ", $this->plugin_slug );
@@ -451,6 +448,44 @@ var meni_selected_icon;
 		}
 	}
 
+
+	/* Checks for file permissions in the sprites directory */
+	function check_sprites_dir( $echo = true ) {
+		$codex_page_url = 'http://codex.wordpress.org/Changing_File_Permissions';
+		$ok = true;
+		if ( ! is_dir( $this->sprites_dir ) ) {
+			// The sprites directory doesn't exist, try to create it.
+			$ok = mkdir( $this->sprites_dir, 0755, true );
+		}
+		if ( ! $ok ) {
+			if ( $echo )
+				$this->show_error( sprint( __( "Error: your <code>%s</code> directory hasn't write permissions. You can either <a href='%s'>make it writable</a> or manually create a <code>%s</code> directory with write permissions inside it." ) , $this->plugin_dir, $codex_page_url, $this->sprites_subfolder ) );
+			return false;
+		}
+
+		if ( is_writable( $this->sprites_dir ) ) {
+			$file = $this->sprites_dir . '/sprites.png';
+			if ( is_file( $file ) && ! is_writable( $file ) ) {
+				if ( $echo ) $this->show_error( sprint( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $file, $codex_page_url ) );
+				return false;
+			}
+			$file = $this->sprites_dir . '/sprites.css';
+			if ( is_file( $file ) && ! is_writable( $file ) ) {
+				if ( $echo ) $this->show_error( sprint( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $file, $codex_page_url ) );
+				return false;
+			}
+		}
+		else {
+			if ( $echo ) $this->show_error( sprint( __( "Error: your <code>%s</code> directory hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work." ) , $this->sprites_dir, $codex_page_url ) );
+			return false;
+		}
+		return true;
+	}
+
+
+	function show_error( $message ) {
+		echo "<div id='message' class='error'>$message</div>\n";
+	}
 
 	/**
 	 * Receives the order through Ajax, and saves it to the database.

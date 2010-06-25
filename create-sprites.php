@@ -4,7 +4,8 @@ function MENI_update_sprites() {
 	global $mystique_eni;
 
 	$dirpath = $mystique_eni->plugin_dir . '/icons';
-	if ( ! is_dir( $dirpath ) ) return;
+	if ( ! is_dir( $dirpath ) ) return false;
+	if ( ! $mystique_eni->check_sprites_dir( false ) ) return false;
 
 	// Read the .png files in the directory
 	$icons = array();
@@ -64,7 +65,7 @@ function MENI_update_sprites() {
 		}
 	}
 
-	// TODO: check if the file is writable
+
 	$spritefile = $mystique_eni->sprites_dir . '/sprite.png';
 	imagepng( $sprite, $spritefile );
 	imagedestroy( $sprite );
