@@ -60,12 +60,12 @@ function MENI_update_sprites() {
 			/***** CSS Stuff ***/
 			#header a.nav-extra.rss{background:url("/wp-content/uploads/mystique_icons/nav-rss.png") no-repeat scroll right top transparent;}
 			$name = $icon_matrix[$i][$j][1];
-			$css .= "#header a.nav-extra.meni-$name {background:url('{$mystique_eni->plugin_url}/sprites/sprite.png') no-repeat scroll -{$left}px -{$top}px transparent;}\n";
+			$css .= "#header a.nav-extra.meni-$name {background:url('{$mystique_eni->sprites_url}/sprite.png') no-repeat scroll -{$left}px -{$top}px transparent;}\n";
 		}
 	}
 
 	// TODO: check if the file is writable
-	$spritefile = $mystique_eni->plugin_dir . '/sprites/sprite.png';
+	$spritefile = $mystique_eni->sprites_dir . '/sprite.png';
 	imagepng( $sprite, $spritefile );
 	imagedestroy( $sprite );
 
@@ -75,7 +75,7 @@ function MENI_update_sprites() {
 
 EOF
 	. $css;
-	$cssfile = $mystique_eni->plugin_dir . '/sprites/sprite.css';
+	$cssfile = $mystique_eni->sprites_dir . '/sprite.css';
 	file_put_contents( $cssfile, $css );
 }
 

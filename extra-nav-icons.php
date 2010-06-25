@@ -34,6 +34,10 @@ class Mystique_Extra_Nav_Icons {
 	var $plugin_slug = 'mystique-extra-nav-icons';
 	var $plugin_url;
 	var $default_icons;
+	var $sprites_subfolder = 'sprites';
+	var $sprites_dir;
+	var $sprites_url;
+
 
 	/* Initialize variables */
 	function init() {
@@ -87,6 +91,9 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'yahoo', 'http://pulse.yahoo.com/YOUR_USERID', '' ),
 			new MENI_Icon( 'youtube', 'http://www.youtube.com/user/YOUR_USERNAME', '' ),
 		);
+
+		$this->sprites_dir = $this->plugin_dir . '/' . sprites_subfolder;
+		$this->sprites_url = $this->plugin_url . '/' . sprites_subfolder;;
 
 		// TODO: choose some default values to show
 
@@ -187,6 +194,9 @@ class Mystique_Extra_Nav_Icons {
 		printf( "<div class='wrap'>\n<h2>%s</h2>", __( 'Mystique Extra Nav Icons settings', $this->plugin_slug ) );
 
 		// TODO: check if the sprites directory is writable.
+		if () {
+			
+		}
 
 		echo '<p>';
 		_e( "Drag and drop the icons to change their order. ", $this->plugin_slug );
@@ -519,8 +529,8 @@ var meni_selected_icon;
 
 	/* It loads the CSS file for the sprites. */
 	function load_sprites_css() {
-		if ( is_file( $this->plugin_dir . '/sprites/sprite.css' ) ) {
-			wp_enqueue_style( 'meni-sprites', $this->plugin_url . '/sprites/sprite.css' );
+		if ( is_file( $this->sprites_dir . '/sprite.css' ) ) {
+			wp_enqueue_style( 'meni-sprites', $this->sprites_url . '/sprite.css' );
 		}
 	}
 
