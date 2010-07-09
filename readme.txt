@@ -10,8 +10,13 @@ With this plugin you can choose your nav icons on the top right in Mystique them
 
 == Description ==
 
-TODO
-TODO: credits
+Use this plugin to customize your navigation buttons on the top right
+when using Mystique theme.
+
+You can drag 'n drop your icons in the admin interface to customize them.
+
+Credits for the images and idea: Mark N Hewitt http://www.marknhewitt.co.uk/archives/1921
+
 
 == Installation ==
 
@@ -22,16 +27,22 @@ TODO: credits
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= question =
 
-An answer to that question.
+Answer.
 
 == Screenshots ==
 
-1. Admin user interface
-2. You can rearrange your icon order via drag 'n drop.
+1. This plugin in action in the Mystique interface.
+2. Admin user interface
+3. You can rearrange your icon order via drag 'n drop.
 
 == Changelog ==
 
 = 0.1 =
 * Initial release.
+
+== Upgrade Notice ==
+
+= 0.1 =
+* Initial stable version.
