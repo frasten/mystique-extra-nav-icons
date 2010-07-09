@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: mystique, navigation, icons, icon, nav, drag and drop, dragdrop, ajax, jquery, theme, sprites
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.1
+Stable tag: 0.1.1
 
 With this plugin you can choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
 

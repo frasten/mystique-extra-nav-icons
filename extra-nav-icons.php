@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://polpoinodroidi.com/wordpress-plugins/mystique-extra-navigation-icons/
 Description:
-Version: 0.1
+Version: 0.1.1
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
