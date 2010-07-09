@@ -1,0 +1,3 @@
+* translate it into some other languages.
+* add some default values.
+* allow users to set a different image size. It should be quite trivial.
