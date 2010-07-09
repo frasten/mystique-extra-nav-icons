@@ -27,9 +27,14 @@ Credits for the images and idea: Mark N Hewitt http://www.marknhewitt.co.uk/arch
 
 == Frequently Asked Questions ==
 
-= question =
+= When this plugin is active, my icons disappear =
 
-Answer.
+You have to configure this plugin first.
+Go to Settings -- Mystique Nav Icons.
+
+= I already edited my icons, what should I do? =
+
+If you already added some code to edit the icons, please remove it.
 
 == Screenshots ==
 
