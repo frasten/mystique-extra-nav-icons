@@ -15,6 +15,8 @@ when using Mystique theme.
 
 You can drag 'n drop your icons in the admin interface to customize them.
 
+It also uses image sprites to speed up the loading time of your pages.
+
 Credits for the images and idea: Mark N Hewitt http://www.marknhewitt.co.uk/archives/1921
 
 
