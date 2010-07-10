@@ -76,6 +76,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'paypal', '', '' ),
 			new MENI_Icon( 'picasa', 'http://picasaweb.google.it/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'rss', get_bloginfo( 'rss2_url' ), '' ),
+			new MENI_Icon( 'schuelervz', 'http://www.schuelervz.net/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'skype', 'skype:YOUR_USERNAME', '' ),
 			new MENI_Icon( 'slideshare', 'http://www.slideshare.net/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'soundcloud', 'http://soundcloud.com/YOUR_USERNAME', '' ),
@@ -131,7 +132,7 @@ class Mystique_Extra_Nav_Icons {
 	 */
 	function get_option( $name ) {
 		$settings = get_option( $this->plugin_slug );
-		if ( array_key_exists( $name, $settings ) )
+		if ( is_array( $settings ) && array_key_exists( $name, $settings ) )
 			return $settings[$name];
 		else
 			return false;
