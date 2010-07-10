@@ -471,12 +471,12 @@ var meni_selected_icon;
 		}
 
 		if ( is_writable( $this->sprites_dir ) ) {
-			$file = $this->sprites_dir . '/sprites.png';
+			$file = $this->sprites_dir . '/sprite.png';
 			if ( is_file( $file ) && ! is_writable( $file ) ) {
 				if ( $echo ) $this->show_error( sprintf( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work.", $this->plugin_slug ) , $file, $codex_page_url ) );
 				return false;
 			}
-			$file = $this->sprites_dir . '/sprites.css';
+			$file = $this->sprites_dir . '/sprite.css';
 			if ( is_file( $file ) && ! is_writable( $file ) ) {
 				if ( $echo ) $this->show_error( sprintf( __( "Error: your <code>%s</code> file hasn't write permissions. You must <a href='%s'>make it writable</a> to make this plugin work.", $this->plugin_slug ) , $file, $codex_page_url ) );
 				return false;
