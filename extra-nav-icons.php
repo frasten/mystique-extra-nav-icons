@@ -505,6 +505,8 @@ var meni_selected_icon;
 		if ( ! is_array( $old_order ) ) $old_order = array();
 
 		$new_order = $_POST['meni_enabled'];
+		if ( ! is_array( $new_order ) ) $new_order = array();
+
 		$this->update_option( 'enabled_order', $new_order );
 		$this->update_option( 'disabled_order', $_POST['meni_disabled'] );
 
