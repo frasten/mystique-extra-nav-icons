@@ -203,6 +203,9 @@ class Mystique_Extra_Nav_Icons {
 		$this->check_sprites_dir();
 
 		echo '<p>';
+		echo '<strong>';
+		_e( "To enable an icon, drag and drop it inside the green box. ", $this->plugin_slug );
+		echo '</strong><br />';
 		_e( "Drag and drop the icons to change their order. ", $this->plugin_slug );
 		_e( "Move them to the bottom box to hide them.", $this->plugin_slug );
 		echo '<br />';
