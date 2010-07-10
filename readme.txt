@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: mystique, navigation, icons, icon, nav, drag and drop, dragdrop, ajax, jquery, theme, sprites
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.2
+Stable tag: 0.3
 
 Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
 
@@ -45,6 +45,9 @@ If you already added some code to edit the icons, please remove it.
 3. You can rearrange your icon order via drag 'n drop.
 
 == Changelog ==
+
+= 0.3 =
+* Now you can customize your icons size.
 
 = 0.2 =
 * Fixed many PHP warnings.
