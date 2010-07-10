@@ -17,6 +17,8 @@ function MENI_update_sprites() {
 	}
 
 	$num_icons = sizeof( $icon_files );
+	if ( ! $num_icons ) return false;
+
 	$row_size = 6;
 
 	/* Put it into a bidimensional matrix. */
