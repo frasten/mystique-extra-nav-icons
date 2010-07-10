@@ -35,10 +35,15 @@ function MENI_update_sprites() {
 
 
 	/******** IMAGE CREATION **********/
+	$icon_size = $mystique_eni->get_option( 'icon_size' );
+	$icon_size = intval( $icon_size );
+	if ( $icon_size <= 0 ) $icon_size = 64;
+	if ( $icon_size > 150 ) $icon_size = 150;
+
 	$columns = sizeof( $icon_matrix[0] );
 	$rows = sizeof( $icon_matrix );
-	$sprite_w = 64 * $columns;
-	$sprite_h = 64 * $rows;
+	$sprite_w = $icon_size * $columns;
+	$sprite_h = $icon_size * $rows;
 
 
 	$sprite = imagecreatetruecolor( $sprite_w, $sprite_h );
@@ -56,9 +61,9 @@ function MENI_update_sprites() {
 			if ( ! $iconfile ) continue;
 
 			$img = imagecreatefrompng( $iconfile );
-			$left = 64*$j;
-			$top = 64*$i;
-			imagecopy( $sprite, $img, $left, $top, 0, 0, 64, 64);
+			$left = $icon_size*$j;
+			$top = $icon_size*$i;
+			imagecopyresampled( $sprite, $img, $left, $top, 0, 0, $icon_size, $icon_size, 64, 64);
 			imagedestroy( $img );
 			/***** CSS Stuff ***/
 			#header a.nav-extra.rss{background:url("/wp-content/uploads/mystique_icons/nav-rss.png") no-repeat scroll right top transparent;}
@@ -71,10 +76,13 @@ function MENI_update_sprites() {
 	$spritefile = $mystique_eni->sprites_dir . '/sprite.png';
 	imagepng( $sprite, $spritefile );
 	imagedestroy( $sprite );
-
+	// Adapt these sizes from 64px to a custom size.
+	$h1 = intval( 0.84 * $icon_size ); // 54px vs 64px
+	$h2 = ceil( 0.94 * $icon_size ); // 60px vs 64px
+	$h3 = intval( -0.72 * $icon_size ); // -46px vs 64px
 	$css = <<<EOF
-#header p.nav-extra {top:-46px;height:54px;}
-#header a.nav-extra {height:60px;}
+#header p.nav-extra {top:{$h3}px;height:{$h1}px;}
+#header a.nav-extra {height:{$h2}px;width:{$icon_size}px;}
 
 EOF
 	. $css;

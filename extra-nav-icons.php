@@ -37,6 +37,7 @@ class Mystique_Extra_Nav_Icons {
 	var $sprites_subfolder = 'sprites';
 	var $sprites_dir;
 	var $sprites_url;
+	var $icon_size;
 
 
 	/* Initialize variables */
@@ -103,6 +104,10 @@ class Mystique_Extra_Nav_Icons {
 			MENI_update_sprites();
 		}
 
+		if ( is_admin() ) {
+			// Reset order POST call
+			add_action( 'admin_post_meni_icon_size', array( &$this, 'icon_size_request' ) );
+		}
 
 		// FOR DEBUG PURPOSES:
 		//delete_option($this->plugin_slug);
@@ -242,6 +247,23 @@ class Mystique_Extra_Nav_Icons {
 		echo "<ul id='meni_disabled_icons' class='iconSortable'>\n";
 		$this->_print_icon_list( $dis_order );
 		echo "</ul>";
+
+?>
+		<form name="meni_icon_size" method="post" action="admin-post.php" class='clear'>
+<?php _e( 'Icon size (default 64):', $this->plugin_slug ); ?>
+			<input type="text" name="icon_size" value="<?php
+			$size = intval( $this->get_option( 'icon_size' ) );
+			if ( $size <= 0 ) $size = 64;
+			echo $size;
+			?>" size="4" />
+			<?php if (function_exists( 'wp_nonce_field' ) === true) wp_nonce_field( 'meni_icon_size' ); ?>
+			<p id="submitbutton">
+				<input type="hidden" name="action" value="meni_icon_size" />
+				<input type="submit" value="<?php _e( 'Update icon size', $this->plugin_slug ); ?> &raquo;" class="button-secondary" />
+			</p>
+		</form>
+		<?php
+
 
 
 ?>
@@ -398,7 +420,7 @@ var meni_selected_icon;
 	}
 
 
-/**
+	/**
 	 * Returns the list of the icons. If a custom order is set, they will
 	 * be returned in that order.
 	 *
@@ -493,9 +515,35 @@ var meni_selected_icon;
 	}
 
 
+	/**
+	 * Action called when clicking on 'Update icon size' in the admin area.
+	 * */
+	function icon_size_request() {
+		if ( ! current_user_can('manage_options') )
+			wp_die( __( 'Settings were not saved: you don&lsquo;t have the priviledges to do this!', $this->plugin_slug ) );
+
+		// cross check the given referer
+		check_admin_referer( 'meni_icon_size' );
+
+		$oldsize = $this->get_option( 'icon_size' );
+
+		$size = intval( $_POST['icon_size'] );
+		if ( $size <= 0 ) $size = 64;
+		if ( $size > 150 ) $size = 150;
+		$this->update_option( 'icon_size', $size );
+
+		// Regenerate the sprites
+		if ( $oldsize != $size )
+			MENI_update_sprites();
+
+		wp_redirect( $_POST['_wp_http_referer'] );
+	}
+
+
 	function show_error( $message ) {
 		echo "<div id='message' class='error'>$message</div>\n";
 	}
+
 
 	/**
 	 * Receives the order through Ajax, and saves it to the database.
