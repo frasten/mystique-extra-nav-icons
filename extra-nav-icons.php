@@ -502,6 +502,7 @@ var meni_selected_icon;
 		if ( ! current_user_can( 'manage_options' ) ) die( '1' );
 
 		$old_order = $this->get_option( 'enabled_order' );
+		if ( ! is_array( $old_order ) ) $old_order = array();
 
 		$new_order = $_POST['meni_enabled'];
 		$this->update_option( 'enabled_order', $new_order );
@@ -592,7 +593,7 @@ add_action( 'mystique_navigation_extra', array( &$mystique_eni, 'get_nav' ), 20 
 
 // Add settings menu to admin interface
 add_action( 'admin_menu', array( &$mystique_eni, 'admin_menu' ) );
-add_filter( 'plugin_action_links', array( &$mystique_eni, 'add_action_link' ) );
+add_filter( 'plugin_action_links', array( &$mystique_eni, 'add_action_link' ), 10, 2 );
 
 
 // Manage ajax communications when ordering icons (admin only)
