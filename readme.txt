@@ -1,6 +1,6 @@
 === Mystique Extra Nav Icons ===
 Contributors: frasten
-Donate link: http://example.com/
+Donate link: http://polpoinodroidi.com/
 Tags: mystique, navigation, icons, icon, nav, drag and drop, dragdrop, ajax, jquery, theme, sprites
 Requires at least: 2.8
 Tested up to: 3.0
@@ -19,6 +19,7 @@ It also uses image sprites to speed up the loading time of your pages.
 
 Credits for the images and idea: Mark N Hewitt http://www.marknhewitt.co.uk/archives/1921
 
+Some code from: Kerem Erkan: http://keremerkan.net/posts/adding-facebook-and-linkedin-icons-on-mystique-v2-x/
 
 == Installation ==
 
