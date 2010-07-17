@@ -46,6 +46,10 @@ class Mystique_Extra_Nav_Icons {
 		$this->plugin_url = WP_PLUGIN_URL . "/$dir";
 		$this->plugin_dir = WP_PLUGIN_DIR . "/$dir";
 
+		/* Load translations, it tries to load:
+		 * mystique-extra-nav-icons/translations/mystique-extra-nav-icons-LOCALE.mo */
+		load_plugin_textdomain( $this->plugin_slug, false, $dir . '/translations' );
+
 		$this->default_icons = array(
 			new MENI_Icon( 'android', '', '' ),
 			new MENI_Icon( 'apple', '', '' ),
