@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Mystique Extra Nav Icons 0.3\n"
+"Project-Id-Version: Mystique Extra Nav Icons 0.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/extra-nav-icons\n"
-"POT-Creation-Date: 2010-07-17 04:04+0200\n"
+"POT-Creation-Date: 2010-08-15 00:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,79 +16,87 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extra-nav-icons.php:162 extra-nav-icons.php:164
+#: extra-nav-icons.php:169 extra-nav-icons.php:171
 msgid "Mystique Nav Icons"
 msgstr ""
 
-#: extra-nav-icons.php:196
+#: extra-nav-icons.php:203
 msgid "Settings"
 msgstr ""
 
-#: extra-nav-icons.php:206
+#: extra-nav-icons.php:213
 msgid "Mystique Extra Nav Icons settings"
 msgstr ""
 
-#: extra-nav-icons.php:212
+#: extra-nav-icons.php:219
 msgid "To enable an icon, drag and drop it inside the green box. "
 msgstr ""
 
-#: extra-nav-icons.php:214
+#: extra-nav-icons.php:221
 msgid "Drag and drop the icons to change their order. "
 msgstr ""
 
-#: extra-nav-icons.php:215
+#: extra-nav-icons.php:222
 msgid "Move them to the bottom box to hide them."
 msgstr ""
 
-#: extra-nav-icons.php:217
+#: extra-nav-icons.php:224
 msgid "In the right box you can edit the URL and the mouseover text."
 msgstr ""
 
-#: extra-nav-icons.php:219
+#: extra-nav-icons.php:226
 msgid "Note: the changes are saved everytime you make them."
 msgstr ""
 
-#: extra-nav-icons.php:225
+#: extra-nav-icons.php:232
 msgid "Enabled icons:"
 msgstr ""
 
-#: extra-nav-icons.php:233
+#: extra-nav-icons.php:240
 msgid "Selected icon: "
 msgstr ""
 
-#: extra-nav-icons.php:233
+#: extra-nav-icons.php:240
 msgid "none"
 msgstr ""
 
-#: extra-nav-icons.php:234
+#: extra-nav-icons.php:241
 msgid "Url"
 msgstr ""
 
-#: extra-nav-icons.php:235
+#: extra-nav-icons.php:242
 msgid "Text on mouseover"
 msgstr ""
 
-#: extra-nav-icons.php:239
+#: extra-nav-icons.php:246
 msgid "Saving..."
 msgstr ""
 
-#: extra-nav-icons.php:246
+#: extra-nav-icons.php:253
 msgid "Disabled icons:"
 msgstr ""
 
-#: extra-nav-icons.php:253
-msgid "Icon size (default 64):"
+#: extra-nav-icons.php:259
+msgid "Other options:"
 msgstr ""
 
 #: extra-nav-icons.php:262
-msgid "Update icon size"
+msgid "Icon size (default 64):"
 msgstr ""
 
-#: extra-nav-icons.php:296
+#: extra-nav-icons.php:270
+msgid "Open links in a new tab:"
+msgstr ""
+
+#: extra-nav-icons.php:275
+msgid "Update settings"
+msgstr ""
+
+#: extra-nav-icons.php:309
 msgid "Selected icon:"
 msgstr ""
 
-#: extra-nav-icons.php:494
+#: extra-nav-icons.php:508
 #, php-format
 msgid ""
 "Error: your <code>%s</code> directory hasn't write permissions. You can "
@@ -96,21 +104,21 @@ msgid ""
 "code> directory with write permissions inside it."
 msgstr ""
 
-#: extra-nav-icons.php:501 extra-nav-icons.php:506
+#: extra-nav-icons.php:515 extra-nav-icons.php:520
 #, php-format
 msgid ""
 "Error: your <code>%s</code> file hasn't write permissions. You must <a "
 "href='%s'>make it writable</a> to make this plugin work."
 msgstr ""
 
-#: extra-nav-icons.php:511
+#: extra-nav-icons.php:525
 #, php-format
 msgid ""
 "Error: your <code>%s</code> directory hasn't write permissions. You must <a "
 "href='%s'>make it writable</a> to make this plugin work."
 msgstr ""
 
-#: extra-nav-icons.php:523
+#: extra-nav-icons.php:537
 msgid ""
 "Settings were not saved: you don&lsquo;t have the priviledges to do this!"
 msgstr ""
