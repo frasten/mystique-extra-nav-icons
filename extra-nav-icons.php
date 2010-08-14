@@ -122,13 +122,16 @@ class Mystique_Extra_Nav_Icons {
 	function get_nav( $nav_extra ) {
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
+		$new_tab = $this->get_option( 'new_tab' );
 		$nav_extra = '';
 		// In reverse order, because they are floated right.
 		for ( $i = sizeof( $en_order ) - 1; $i >= 0; $i-- ) {
 			$icon = $en_order[$i];
 			$nav_extra .= "<a href='" . esc_attr( $icon->url ) .
 				"' class='nav-extra meni-{$icon->name}' title='" .
-				esc_attr( $icon->text ) . "'><span>" .
+				esc_attr( $icon->text ) . "'" .
+				( $new_tab ? " target='_blank'" : "" ) .
+				"><span>" .
 				esc_html( $icon->text ) . "</span></a>\n";
 		}
 
@@ -252,8 +255,10 @@ class Mystique_Extra_Nav_Icons {
 		$this->_print_icon_list( $dis_order );
 		echo "</ul>";
 
+
+		echo '<h3 class="clear">' . __( "Other options:", $this->plugin_slug ) . '</h3>';
 ?>
-		<form name="meni_icon_size" method="post" action="admin-post.php" class='clear'>
+		<form name="meni_icon_size" method="post" action="admin-post.php">
 <?php _e( 'Icon size (default 64):', $this->plugin_slug ); ?>
 			<input type="text" name="icon_size" value="<?php
 			$size = intval( $this->get_option( 'icon_size' ) );
@@ -261,9 +266,13 @@ class Mystique_Extra_Nav_Icons {
 			echo $size;
 			?>" size="4" />
 			<?php if (function_exists( 'wp_nonce_field' ) === true) wp_nonce_field( 'meni_icon_size' ); ?>
+			<br />
+			<?php _e( 'Open links in a new tab:', $this->plugin_slug ); ?>
+			<input type="checkbox" name="new_tab"<?php checked( $this->get_option( 'new_tab' ) ) ?>/>
+
 			<p id="submitbutton">
 				<input type="hidden" name="action" value="meni_icon_size" />
-				<input type="submit" value="<?php _e( 'Update icon size', $this->plugin_slug ); ?> &raquo;" class="button-secondary" />
+				<input type="submit" value="<?php _e( 'Update settings', $this->plugin_slug ); ?> &raquo;" class="button-secondary" />
 			</p>
 		</form>
 		<?php
@@ -529,6 +538,8 @@ var meni_selected_icon;
 
 		// cross check the given referer
 		check_admin_referer( 'meni_icon_size' );
+
+		$this->update_option( 'new_tab', $_POST['new_tab'] == 'on' ? 1 : 0 );
 
 		$oldsize = $this->get_option( 'icon_size' );
 
