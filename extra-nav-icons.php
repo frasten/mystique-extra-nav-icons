@@ -110,7 +110,7 @@ class Mystique_Extra_Nav_Icons {
 
 		if ( is_admin() ) {
 			// Reset order POST call
-			add_action( 'admin_post_meni_icon_size', array( &$this, 'icon_size_request' ) );
+			add_action( 'admin_post_meni_other_options', array( &$this, 'other_options_request' ) );
 		}
 
 		// FOR DEBUG PURPOSES:
@@ -258,20 +258,20 @@ class Mystique_Extra_Nav_Icons {
 
 		echo '<h3 class="clear">' . __( "Other options:", $this->plugin_slug ) . '</h3>';
 ?>
-		<form name="meni_icon_size" method="post" action="admin-post.php">
-<?php _e( 'Icon size (default 64):', $this->plugin_slug ); ?>
+		<form name="meni_other_options" method="post" action="admin-post.php">
+			<?php _e( 'Icon size (default 64):', $this->plugin_slug ); ?>
 			<input type="text" name="icon_size" value="<?php
 			$size = intval( $this->get_option( 'icon_size' ) );
 			if ( $size <= 0 ) $size = 64;
 			echo $size;
 			?>" size="4" />
-			<?php if (function_exists( 'wp_nonce_field' ) === true) wp_nonce_field( 'meni_icon_size' ); ?>
+			<?php if (function_exists( 'wp_nonce_field' ) === true) wp_nonce_field( 'meni_other_options' ); ?>
 			<br />
 			<?php _e( 'Open links in a new tab:', $this->plugin_slug ); ?>
 			<input type="checkbox" name="new_tab"<?php checked( $this->get_option( 'new_tab' ) ) ?>/>
 
 			<p id="submitbutton">
-				<input type="hidden" name="action" value="meni_icon_size" />
+				<input type="hidden" name="action" value="meni_other_options" />
 				<input type="submit" value="<?php _e( 'Update settings', $this->plugin_slug ); ?> &raquo;" class="button-secondary" />
 			</p>
 		</form>
@@ -532,12 +532,12 @@ var meni_selected_icon;
 	/**
 	 * Action called when clicking on 'Update icon size' in the admin area.
 	 * */
-	function icon_size_request() {
+	function other_options_request() {
 		if ( ! current_user_can('manage_options') )
 			wp_die( __( 'Settings were not saved: you don&lsquo;t have the priviledges to do this!', $this->plugin_slug ) );
 
 		// cross check the given referer
-		check_admin_referer( 'meni_icon_size' );
+		check_admin_referer( 'meni_other_options' );
 
 		$this->update_option( 'new_tab', $_POST['new_tab'] == 'on' ? 1 : 0 );
 
