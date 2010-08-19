@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://wiki.github.com/frasten/mystique-extra-nav-icons/
 Description: Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
-Version: 0.4
+Version: 0.4.1
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
@@ -78,6 +78,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'identica', 'http://identi.ca/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'lastfm', 'http://www.lastfm.it/user/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'linkedin', 'http://linkedin.com/in/YOUR_PUBLIC_PROFILE', '' ),
+			new MENI_Icon( 'meinvz', 'http://www.meinvz.net/Profile/CHANGE_ME', '' ),
 			new MENI_Icon( 'mirc', '', '' ),
 			new MENI_Icon( 'myspace', 'http://www.myspace.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'paypal', '', '' ),
