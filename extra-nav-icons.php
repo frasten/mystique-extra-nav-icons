@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://wiki.github.com/frasten/mystique-extra-nav-icons/
 Description: Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
-Version: 0.4.1
+Version: 0.4.2
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
@@ -71,10 +71,12 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'github', 'http://github.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'gmail', 'mailto:YOUR_USERNAME@gmail.com', '' ),
 			new MENI_Icon( 'goodreads', 'http://www.goodreads.com/user/show/YOUR_USERID', '' ),
+			new MENI_Icon( 'google-donate', '', '' ),
 			new MENI_Icon( 'googlebuzz', 'http://www.google.com/profiles/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'googlewave', '', '' ),
 			new MENI_Icon( 'gowalla', 'http://gowalla.com/users/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'hyves', 'http://YOUR_USERNAME.hyves.nl/', '' ),
+			new MENI_Icon( 'icq', 'http://www.icq.com/people/YOUR_ICQ_NUMBER/', '' ),
 			new MENI_Icon( 'identica', 'http://identi.ca/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'lastfm', 'http://www.lastfm.it/user/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'linkedin', 'http://linkedin.com/in/YOUR_PUBLIC_PROFILE', '' ),
@@ -93,8 +95,10 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'sourceforge', 'http://YOUR_PROJECT.sourceforge.net/', '' ),
 			new MENI_Icon( 'spotify', 'spotify:artist:YOUR_ID', '' ),
 			new MENI_Icon( 'steam', '', '' ),
+			new MENI_Icon( 'tumblr', 'http://YOUR_USERNAME.tumblr.com/', '' ),
 			new MENI_Icon( 'twitter', 'http://twitter.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'ubuntu', 'http://ubuntuforums.org/member.php?u=YOUR_USERID', '' ),
+			new MENI_Icon( 'upromise', '', '' ),
 			new MENI_Icon( 'vimeo', 'http://vimeo.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'wiki', 'http://en.wikipedia.org/wiki/CHANGE_ME', '' ),
 			new MENI_Icon( 'windows_live', 'http://YOUR_USERNAME.profile.live.com/', '' ),
