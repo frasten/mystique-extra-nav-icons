@@ -4,7 +4,7 @@ Donate link: http://polpoinodroidi.com/
 Tags: mystique, navigation, icons, icon, nav, drag and drop, dragdrop, ajax, jquery, theme, sprites
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 0.4.2
+Stable tag: 0.4.3
 
 Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
 
