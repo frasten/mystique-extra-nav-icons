@@ -71,7 +71,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'github', 'http://github.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'gmail', 'mailto:YOUR_USERNAME@gmail.com', '' ),
 			new MENI_Icon( 'goodreads', 'http://www.goodreads.com/user/show/YOUR_USERID', '' ),
-			new MENI_Icon( 'google-donate', '', '' ),
+			new MENI_Icon( 'googledonate', '', '' ),
 			new MENI_Icon( 'googlebuzz', 'http://www.google.com/profiles/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'googlewave', '', '' ),
 			new MENI_Icon( 'gowalla', 'http://gowalla.com/users/YOUR_USERNAME', '' ),
