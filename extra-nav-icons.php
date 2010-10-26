@@ -509,8 +509,7 @@ var meni_selected_icon;
 		$ok = true;
 		if ( ! is_dir( $this->sprites_dir ) ) {
 			// The sprites directory doesn't exist, try to create it.
-			// TODO: replace with wp_mkdir_p()
-			$ok = mkdir( $this->sprites_dir, 0755, true );
+			$ok = wp_mkdir_p( $this->sprites_dir );
 		}
 		if ( ! $ok ) {
 			if ( $echo )
