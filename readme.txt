@@ -47,6 +47,20 @@ If you already added some code to edit the icons, please remove it.
 
 == Changelog ==
 
+= 0.4.4 =
+* Fixed warnings with hosts with mkdir() disabled.
+* Added new Orkout icon.
+* Fixed (again) issues with google donate icon.
+
+= 0.4.3 =
+* Fixed issues with google donate icon.
+
+= 0.4.2 =
+* Added Google Donate icon.
+* Added ICQ icon.
+* Added Tumblr icon.
+* Added Upromise icon.
+
 = 0.4.1 =
 * Added MeinVZ social icon.
 
