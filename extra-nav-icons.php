@@ -83,6 +83,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'meinvz', 'http://www.meinvz.net/Profile/CHANGE_ME', '' ),
 			new MENI_Icon( 'mirc', '', '' ),
 			new MENI_Icon( 'myspace', 'http://www.myspace.com/YOUR_USERNAME', '' ),
+			new MENI_Icon( 'orkout', 'http://www.orkut.com/Profile?uid=YOUR_USERID', '' ),
 			new MENI_Icon( 'paypal', '', '' ),
 			new MENI_Icon( 'picasa', 'http://picasaweb.google.it/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'podcast', '', '' ),
