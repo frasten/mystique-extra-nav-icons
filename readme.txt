@@ -47,9 +47,12 @@ If you already added some code to edit the icons, please remove it.
 
 == Changelog ==
 
+= 0.4.5 =
+* Fixed typo in Orkut.
+
 = 0.4.4 =
 * Fixed warnings with hosts with mkdir() disabled.
-* Added new Orkout icon.
+* Added new Orkut icon.
 * Fixed (again) issues with google donate icon.
 
 = 0.4.3 =
