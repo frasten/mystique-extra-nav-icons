@@ -1,0 +1,5 @@
+* translate it into some other languages.
+* add some default values.
+* allow users to set a different image size. It should be quite trivial.
+* if I auto-update the plugin, should I regenerate the sprites?
+  (i.e.: are the sprites deleted on update process?)
