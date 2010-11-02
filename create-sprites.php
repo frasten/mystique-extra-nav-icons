@@ -87,7 +87,15 @@ function MENI_update_sprites() {
 EOF
 	. $css;
 	$cssfile = $mystique_eni->sprites_dir . '/sprite.css';
-	file_put_contents( $cssfile, $css );
+
+	/* Save the file */
+	$f = @fopen($cssfile, 'w');
+	if (!$f) {
+		return false;
+	} else {
+		$bytes = fwrite($f, $css);
+		fclose($f);
+	}
 }
 
 
