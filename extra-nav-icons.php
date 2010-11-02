@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://wiki.github.com/frasten/mystique-extra-nav-icons/
 Description: Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
-Version: 0.4.5.1
+Version: 0.4.6
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
@@ -113,6 +113,17 @@ class Mystique_Extra_Nav_Icons {
 
 		// TODO: choose some default values to show
 
+		if ( is_admin() ) {
+			if ( ! function_exists( 'imagecreatetruecolor' ) ) {
+				$this->show_error( __( "Error: You need GD libs installed. Please contact your host.", $this->plugin_slug ) );
+				return;
+			}
+			if ( ! function_exists( 'imagecolorallocatealpha' ) ) {
+				$this->show_error( __( "Error: You need at least PHP 4.3.2 and GD libs installed. Please contact your host.", $this->plugin_slug ) );
+				return;
+			}
+		}
+
 		// Regenerate sprites if they're missing
 		if ( $this->check_sprites_dir( false ) && ( ! is_file( "{$this->sprites_dir}/sprite.png" ) || ! is_file( "{$this->sprites_dir}/sprite.css" ) ) ) {
 			MENI_update_sprites();
@@ -130,6 +141,7 @@ class Mystique_Extra_Nav_Icons {
 
 	/* Outputs the navigation bar on every page. */
 	function get_nav( $nav_extra ) {
+		if ( ! function_exists('esc_attr') ) return;
 		list( $en_order, $dis_order) = $this->get_ordered_list();
 
 		$new_tab = $this->get_option( 'new_tab' );
