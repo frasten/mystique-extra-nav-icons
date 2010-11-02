@@ -47,6 +47,10 @@ If you already added some code to edit the icons, please remove it.
 
 == Changelog ==
 
+= 0.4.6 =
+* Improved compatibility with PHP 4.
+* Added some other checks to possibly avoid fatal errors.
+
 = 0.4.5 =
 * Fixed typo in Orkut.
 
