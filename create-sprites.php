@@ -77,9 +77,9 @@ function MENI_update_sprites() {
 	imagepng( $sprite, $spritefile );
 	imagedestroy( $sprite );
 	// Adapt these sizes from 64px to a custom size.
-	$h1 = intval( 0.84 * $icon_size ); // 54px vs 64px
-	$h2 = ceil( 0.94 * $icon_size ); // 60px vs 64px
-	$h3 = intval( -0.72 * $icon_size ); // -46px vs 64px
+	$h1 = round( 0.844 * $icon_size ); // 54px vs 64px
+	$h2 = round( 0.937 * $icon_size ); // 60px vs 64px
+	$h3 = round( -0.719 * $icon_size ); // -46px vs 64px
 	$css = <<<EOF
 #header p.nav-extra {top:{$h3}px;height:{$h1}px;}
 #header a.nav-extra {height:{$h2}px;width:{$icon_size}px;}
