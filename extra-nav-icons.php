@@ -152,7 +152,7 @@ class Mystique_Extra_Nav_Icons {
 			$nav_extra .= "<a href='" . esc_attr( $icon->url ) .
 				"' class='nav-extra meni-{$icon->name}' title='" .
 				esc_attr( $icon->text ) . "'" .
-				( $new_tab ? " target='_blank'" : "" ) .
+				( $new_tab ? " onclick='window.open(this.href,\"_blank\");return false;'" : "" ) .
 				"><span>" .
 				esc_html( $icon->text ) . "</span></a>\n";
 		}
