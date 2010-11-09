@@ -47,6 +47,9 @@ If you already added some code to edit the icons, please remove it.
 
 == Changelog ==
 
+= 0.4.7 =
+* Added new Ebay, Amazon and login icons.
+
 = 0.4.6.1 =
 * Fixed XHTML strict validation.
 

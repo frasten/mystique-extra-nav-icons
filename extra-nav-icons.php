@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://wiki.github.com/frasten/mystique-extra-nav-icons/
 Description: Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
-Version: 0.4.6.1
+Version: 0.4.7
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
@@ -51,6 +51,7 @@ class Mystique_Extra_Nav_Icons {
 		load_plugin_textdomain( $this->plugin_slug, false, $dir . '/translations' );
 
 		$this->default_icons = array(
+			new MENI_Icon( 'amazon', 'http://www.amazon.com/gp/pdp/profile/YOUR_ID/', '' ),
 			new MENI_Icon( 'android', '', '' ),
 			new MENI_Icon( 'apple', '', '' ),
 			new MENI_Icon( 'beer', '', '' ),
@@ -61,6 +62,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'delicious', 'http://delicious.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'digg', 'http://digg.com/users/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'discogs', 'http://www.discogs.com/artist/YOUR_USERNAME', '' ),
+			new MENI_Icon( 'ebay', 'http://myworld.ebay.com/YOUR_SHOP', '' ),
 			new MENI_Icon( 'email', 'mailto:YOUR_EM@IL.COM', '' ),
 			new MENI_Icon( 'email_subscription', '', '' ),
 			new MENI_Icon( 'facebook', 'http://www.facebook.com/YOUR_USERNAME', '' ),
@@ -80,6 +82,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'identica', 'http://identi.ca/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'lastfm', 'http://www.lastfm.it/user/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'linkedin', 'http://linkedin.com/in/YOUR_PUBLIC_PROFILE', '' ),
+			new MENI_Icon( 'login', '', '' ),
 			new MENI_Icon( 'meinvz', 'http://www.meinvz.net/Profile/CHANGE_ME', '' ),
 			new MENI_Icon( 'mirc', '', '' ),
 			new MENI_Icon( 'myspace', 'http://www.myspace.com/YOUR_USERNAME', '' ),
