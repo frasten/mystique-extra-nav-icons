@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://wiki.github.com/frasten/mystique-extra-nav-icons/
 Description: Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
-Version: 0.4.7
+Version: 0.5.0
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
@@ -68,6 +68,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'facebook', 'http://www.facebook.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'flickr', 'http://www.flickr.com/photos/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'formspring', 'http://www.formspring.me/YOUR_USERNAME', '' ),
+			new MENI_Icon( 'forrst', 'http://forrst.com/people/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'foursquare', 'http://foursquare.com/user/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'friendfeed', 'http://friendfeed.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'github', 'http://github.com/YOUR_USERNAME', '' ),
@@ -83,10 +84,12 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'lastfm', 'http://www.lastfm.it/user/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'linkedin', 'http://linkedin.com/in/YOUR_PUBLIC_PROFILE', '' ),
 			new MENI_Icon( 'login', '', '' ),
+			new MENI_Icon( 'lthing', 'http://www.librarything.com/profile/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'meinvz', 'http://www.meinvz.net/Profile/CHANGE_ME', '' ),
 			new MENI_Icon( 'mirc', '', '' ),
 			new MENI_Icon( 'myspace', 'http://www.myspace.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'orkut', 'http://www.orkut.com/Profile?uid=YOUR_USERID', '' ),
+			new MENI_Icon( 'paltalk', 'http://www.paltalk.com/people/users/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'paypal', '', '' ),
 			new MENI_Icon( 'picasa', 'http://picasaweb.google.it/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'podcast', '', '' ),
@@ -103,6 +106,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'twitter', 'http://twitter.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'ubuntu', 'http://ubuntuforums.org/member.php?u=YOUR_USERID', '' ),
 			new MENI_Icon( 'upromise', '', '' ),
+			new MENI_Icon( 'viadeo', 'http://www.viadeo.com/it/profile/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'vimeo', 'http://vimeo.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'wiki', 'http://en.wikipedia.org/wiki/CHANGE_ME', '' ),
 			new MENI_Icon( 'windows_live', 'http://YOUR_USERNAME.profile.live.com/', '' ),
@@ -209,9 +213,15 @@ class Mystique_Extra_Nav_Icons {
 	 * Loads needed scripts for admin interface.
 	 */
 	function admin_options_scripts() {
-		/* ui.sortable.js from jQuery UI v1.7.1 provided with WP <= 2.9.2 is
-		 * buggy. So I'm using a custom version, backporting a fix to bug #4551 */
-		wp_enqueue_script( 'menijQueryUIsortable', $this->plugin_url . '/js/ui.sortable.js', array( 'jquery-ui-core' ) );
+		if ( ! function_exists( 'has_post_format' ) ) {
+			/* ui.sortable.js from jQuery UI v1.7.1 provided with WP <= 3.0 is
+			 * buggy. So I'm using a custom version, backporting a fix to bug #4551 */
+			wp_enqueue_script( 'menijQueryUIsortable', $this->plugin_url . '/js/ui.sortable.js', array( 'jquery-ui-core' ) );
+		}
+		else {
+			// Fixed in WP >= 3.1
+			wp_enqueue_script( 'jquery-ui-sortable' );
+		}
 	}
 
 
@@ -336,6 +346,7 @@ var meni_text = {
 var meni_selected_icon;
 
 (function($) {
+$(function() { // Executed on DOM ready
 	$("#meni_enabled_icons, #meni_disabled_icons").sortable({
 		connectWith: '.iconSortable',
 		stop: function (event, ui) {
@@ -411,6 +422,8 @@ var meni_selected_icon;
 		}, 500);
 
 	})
+
+});
 })(jQuery);
 /* ]]> */
 </script>
