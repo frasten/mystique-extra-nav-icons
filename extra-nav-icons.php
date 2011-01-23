@@ -209,9 +209,15 @@ class Mystique_Extra_Nav_Icons {
 	 * Loads needed scripts for admin interface.
 	 */
 	function admin_options_scripts() {
-		/* ui.sortable.js from jQuery UI v1.7.1 provided with WP <= 2.9.2 is
-		 * buggy. So I'm using a custom version, backporting a fix to bug #4551 */
-		wp_enqueue_script( 'menijQueryUIsortable', $this->plugin_url . '/js/ui.sortable.js', array( 'jquery-ui-core' ) );
+		if ( ! function_exists( 'has_post_format' ) ) {
+			/* ui.sortable.js from jQuery UI v1.7.1 provided with WP <= 3.0 is
+			 * buggy. So I'm using a custom version, backporting a fix to bug #4551 */
+			wp_enqueue_script( 'menijQueryUIsortable', $this->plugin_url . '/js/ui.sortable.js', array( 'jquery-ui-core' ) );
+		}
+		else {
+			// Fixed in WP >= 3.1
+			wp_enqueue_script( 'jquery-ui-sortable' );
+		}
 	}
 
 
@@ -336,6 +342,7 @@ var meni_text = {
 var meni_selected_icon;
 
 (function($) {
+$(function() {
 	$("#meni_enabled_icons, #meni_disabled_icons").sortable({
 		connectWith: '.iconSortable',
 		stop: function (event, ui) {
@@ -411,6 +418,8 @@ var meni_selected_icon;
 		}, 500);
 
 	})
+
+});
 })(jQuery);
 /* ]]> */
 </script>
