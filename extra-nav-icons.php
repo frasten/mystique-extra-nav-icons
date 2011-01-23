@@ -342,7 +342,7 @@ var meni_text = {
 var meni_selected_icon;
 
 (function($) {
-$(function() {
+$(function() { // Executed on DOM ready
 	$("#meni_enabled_icons, #meni_disabled_icons").sortable({
 		connectWith: '.iconSortable',
 		stop: function (event, ui) {
