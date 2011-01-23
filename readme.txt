@@ -4,7 +4,7 @@ Donate link: http://polpoinodroidi.com/
 Tags: mystique, navigation, icons, icon, nav, drag and drop, dragdrop, ajax, jquery, theme, sprites
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 
 Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
 
@@ -46,6 +46,9 @@ If you already added some code to edit the icons, please remove it.
 3. You can rearrange your icon order via drag 'n drop.
 
 == Changelog ==
+
+= 0.5.1 =
+* No change, due to a broken release.
 
 = 0.5.0 =
 * Fixed compatibility with WP 3.1
