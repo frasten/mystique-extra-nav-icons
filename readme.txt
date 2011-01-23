@@ -3,8 +3,8 @@ Contributors: frasten
 Donate link: http://polpoinodroidi.com/
 Tags: mystique, navigation, icons, icon, nav, drag and drop, dragdrop, ajax, jquery, theme, sprites
 Requires at least: 2.8
-Tested up to: 3.0.1
-Stable tag: 0.4.7
+Tested up to: 3.1
+Stable tag: 0.5.0
 
 Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
 
@@ -46,6 +46,10 @@ If you already added some code to edit the icons, please remove it.
 3. You can rearrange your icon order via drag 'n drop.
 
 == Changelog ==
+
+= 0.5.0 =
+* Fixed compatibility with WP 3.1
+* Added Forrst, Library Thing, Paltalk, Viadeo icons.
 
 = 0.4.7 =
 * Added new Ebay, Amazon and login icons.
@@ -96,6 +100,9 @@ If you already added some code to edit the icons, please remove it.
 * Initial release.
 
 == Upgrade Notice ==
+
+= 0.5.0 =
+* Fixed compatibility with WP 3.1.
 
 = 0.1 =
 * Initial stable version.

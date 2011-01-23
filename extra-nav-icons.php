@@ -3,7 +3,7 @@
 Plugin Name: Mystique Extra Nav Icons
 Plugin URI: http://wiki.github.com/frasten/mystique-extra-nav-icons/
 Description: Choose your nav icons on the top right in Mystique theme via a drag 'n drop interface.
-Version: 0.4.7
+Version: 0.5.0
 Text Domain: mystique-extra-nav-icons
 Author: Frasten
 Author URI: http://polpoinodroidi.com
