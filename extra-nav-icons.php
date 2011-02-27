@@ -70,6 +70,7 @@ class Mystique_Extra_Nav_Icons {
 			new MENI_Icon( 'formspring', 'http://www.formspring.me/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'forrst', 'http://forrst.com/people/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'foursquare', 'http://foursquare.com/user/YOUR_USERNAME', '' ),
+			new MENI_Icon( 'freshbooks', 'http://USERNAME.freshbooks.com', '' ),
 			new MENI_Icon( 'friendfeed', 'http://friendfeed.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'github', 'http://github.com/YOUR_USERNAME', '' ),
 			new MENI_Icon( 'gmail', 'mailto:YOUR_USERNAME@gmail.com', '' ),
